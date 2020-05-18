@@ -7,6 +7,16 @@
   <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-  <?php include "./include/header.php"; ?>
+  <div class="container">
+    <?php 
+     $pageheader="查詢獎號頁";
+     $navPage="5";
+      include "./include/header.php"; 
+    ?>
+
+    <div class="invoiceBox">
+    invoiceBox
+    </div>
+  </div>
 </body>
 </html>

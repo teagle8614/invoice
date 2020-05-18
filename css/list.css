@@ -1,0 +1,130 @@
+.invoiceBox{
+  display: flex;
+}
+.invoiceBox > div{
+  padding: 20px;
+}
+
+.sideNav{
+  width: 150px;
+  min-width: 150px;
+  border-right: 1px solid #ddd;
+}
+/* .sideNav::before{
+  content: '';
+  position: absolute;
+  top: calc(50% - 10px);
+  left: 180px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 20px 0 20px 20px;
+  border-color: transparent transparent transparent orange;
+} */
+.sideNav select{
+  font-size: 1.15rem;
+  margin-bottom: 20px;
+}
+.sideNav ul li{
+  margin-bottom: 10px;
+  text-align: center;
+}
+.sideNav ul li a{
+  color: #fff;
+  background-color: orange;
+  border: 1px solid orange;
+  padding: 15px 0;
+}
+.sideNav ul li a.active{
+  background-color: #ee7f3f;
+  border: 1px solid #ee7f3f;
+  pointer-events: none;
+}
+.sideNav ul li a:hover{
+  color: orange;
+  background-color: #fff;
+}
+
+
+
+.listBox{
+  width: 100%;
+  /* margin: 0 auto; */
+}
+.topBar{
+  display: flex;
+  margin-bottom: 20px;
+  padding: 0 2px;
+  justify-content: space-between;
+}
+.listBox table{
+  /* border-radius: 10px; */
+  /* overflow: hidden; */
+}
+.listBox table tr:nth-child(odd){
+  background-color: #eee;
+}
+.listBox table tr:first-child{
+  color: #fff;
+  background-color: rgb(180, 125, 218);
+}
+.listBox table td{
+  /* border: 1px solid #ddd; */
+}
+.listBox table td:first-child{
+  width: 120px;
+}
+.listBox table td:nth-child(2){
+  width: 140px;
+}
+.listBox table td:last-child{
+  width: 90px;
+}
+.listBox table tr.itemEdit td{
+  background-color: yellowgreen;
+}
+
+select,input{
+  font-size: 1rem;
+  background-color: #ffffffdd;
+}
+.divNumber{
+  display: flex;
+  justify-content: space-between;
+}
+.divNumber input[type=text]{
+  width: 35%;
+  text-transform:uppercase;
+}
+.divNumber input[type=number]{
+  width: 62%;
+}
+
+.btn{
+  color: #fff;
+}
+.btnEdit{
+  background-color: orange;
+  border: 1px solid orange;
+}
+.btnEdit:hover{
+  color: orange;
+  background-color: #fff;
+}
+.btnSave{
+  background-color: orange;
+  border: 1px solid orange;
+  margin-bottom: 5px;
+} 
+.btnSave:hover{
+  color: orange;
+  background-color: #fff;
+} 
+.btnCancel{
+  background-color: orange;
+  border: 1px solid orange;
+}
+.btnCancel:hover{
+  color: orange;
+  background-color: #fff;
+}

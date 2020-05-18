@@ -64,31 +64,20 @@ $p=ceil(date("n")/2);
             </td>
           </tr>
           <tr>
-            <td>特別獎</td>
+            <td>獎項</td>
             <td>
-              <input type="number" name="number" maxlength="8" required>
+              <select name="item">
+                <option value="1">特別獎</option>
+                <option value="2">特獎</option>
+                <option value="3">頭獎</option>
+                <option value="4">增開六獎</option>
+              </select>
             </td>
           </tr>
           <tr>
-            <td>特獎</td>
+            <td>獎號</td>
             <td>
               <input type="number" name="number" maxlength="8" required>
-            </td>
-          </tr>
-          <tr>
-            <td>頭獎</td>
-            <td>
-              <input type="number" name="number" maxlength="8" required>
-              <input type="number" name="number" maxlength="8" required>
-              <input type="number" name="number" maxlength="8" required>
-            </td>
-          </tr>
-          <tr>
-            <td>增開六獎</td>
-            <td>
-              <input type="number" name="number" maxlength="3" required>
-              <input type="number" name="number" maxlength="3">
-              <input type="number" name="number" maxlength="3">
             </td>
           </tr>
         </table>
