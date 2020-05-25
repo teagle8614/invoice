@@ -1,0 +1,121 @@
+.body{
+  position: relative;
+}
+.invoiceBox{
+  display: flex;
+}
+.invoiceBox > div{
+  padding: 20px;
+}
+
+.sideNav{
+  width: 150px;
+  min-width: 150px;
+  border-right: 1px solid #ddd;
+}
+.sideNav select{
+  font-size: 1.15rem;
+  margin-bottom: 20px;
+}
+.sideNav ul li{
+  margin-bottom: 10px;
+  text-align: center;
+  letter-spacing: 2px;
+}
+.sideNav ul li:last-child{
+  margin-bottom: 0;
+}
+.sideNav ul li a{
+  color: #fff;
+  background-color: orange;
+  border: 1px solid orange;
+  padding: 15px 0;
+}
+.sideNav ul li a.active{
+  background-color: #ee7f3f;
+  border: 1px solid #ee7f3f;
+  pointer-events: none;
+}
+.sideNav ul li a:hover{
+  color: orange;
+  background-color: #fff;
+} 
+
+
+
+.listBox{
+  width: 100%;
+  /* margin: 0 auto; */
+}
+.topBar{
+  display: flex;
+  margin-bottom: 20px;
+  padding: 0 2px;
+  justify-content: space-between;
+}
+
+.listBox form table{
+  /* border-radius: 10px; */
+  /* overflow: hidden; */
+}
+.listBox form table tr:first-child{
+  color: #fff;
+  background-color: #b47dda;
+}
+.listBox table tr:nth-child(odd){
+  background-color: #eee;
+}
+.listBox form table tr:first-child td{
+  border: 1px solid #b47dda;
+}
+.listBox form table td{
+  /* border: 1px solid #ddd; */
+}
+.listBox table td:first-child{
+  width: 120px;
+}
+.listBox table td:nth-child(2){
+  width: 140px;
+}
+.listBox form table td:nth-last-child(3){
+  width: 180px;
+}
+.listBox form table td:last-child{
+  width: 90px;
+} 
+.listBox table tr.itemEdit td{
+  background-color: yellowgreen;
+}
+
+
+.btnEdit{
+  background-color: orange;
+  border: 1px solid orange;
+}
+.btnEdit:hover{
+  color: orange;
+  background-color: #fff;
+}
+.btnSave{
+  background-color: orange;
+  border: 1px solid orange;
+  margin-bottom: 5px;
+} 
+.btnSave:hover{
+  color: orange;
+  background-color: #fff;
+} 
+.btnCancel{
+  background-color: orange;
+  border: 1px solid orange;
+}
+.btnCancel:hover{
+  color: orange;
+}
+.btnDelAll{
+  background-color: #666;
+  border: 1px solid #666;
+}
+.btnDelAll:hover{
+  color: #666;
+}

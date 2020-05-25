@@ -1,28 +1,35 @@
+<!-- 對獎頁 -->
 <?php
-include "./com/base.php"; 
-?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>award</title>
-  <link rel="stylesheet" href="./css/style.css">
-</head>
-<body>
-  <?php 
-    include "./include/header.php"; 
-  ?>
+  include "./com/base.php";
+  
+  $aw=$_GET['aw'];
+  $awardNum1=[];
 
-  <?php
-    if(empty($_GET)){
-      echo "請選擇要對獎的項目<a href='invoice.php'>各期獎號</a>";
-      exit();
+  if($aw==0){
+    // 全部
+    for($i=1;$i<=9;$i++){
+      func_award($i);
     }
+  }else{
+    // 分別對獎
+    func_award($aw);
+  }
 
-    // 多寫一個資料表放得獎的金額?
+
+  echo "awardNum1<br>";
+  echo "<pre>"; print_r($awardNum1); echo "<pre>";
+
+  
+
+  
+  
+
+  function func_award($aw){
+    global $awardNum1;
+
     $award_type=[
       // 獎別,第幾獎,需對獎的碼數
+      0=>["全部",0,0],
       1=>["特別獎",1,8],
       2=>["特獎",2,8],
       3=>["頭獎",3,8],
@@ -33,28 +40,30 @@ include "./com/base.php";
       8=>["六獎",3,3],
       9=>["增開六獎",4,3]
     ];
-    $aw=$_GET['aw'];
+
+
     echo "獎別：".$award_type[$aw][0]."<br>";
     echo "年份：".$_GET['year']."<br>";
     echo "期別：".$_GET['period']."<br>";
+    echo "對獎的碼數：".$award_type[$aw][2]."<br>";
 
-    // 筆數
+    // 獎號數量
     $award_nums=nums("award_number",[
       "year"=>$_GET['year'],
       "period"=>$_GET['period'],
       "type"=>$award_type[$aw][1],
     ]);
-
+    echo "獎號數量：".$award_nums;
+    echo "<br>-------------------------------<br>";
     
 
-    echo "獎號數量：".$award_nums;
+    echo "<h5>對獎獎號</h5>";
     $award_number=all("award_number",[
       "year"=>$_GET['year'],
       "period"=>$_GET['period'],
-      "type"=>$award_type[$_GET['aw']][1],
+      "type"=>$award_type[$aw][1],
     ]);
-
-    echo "<h4>對獎獎號</h4>";
+    
     $t_num=[];
     foreach($award_number as $num){
       echo $num['number']."<br>";
@@ -62,23 +71,8 @@ include "./com/base.php";
       $t_num[]=$num['number'];
     }
 
-    // if($award_nums>1){
-    //   $award_numbers=all("award_number",[
-    //     "year"=>$_GET['year'],
-    //     "period"=>$_GET['period'],
-    //     "type"=>$award_type[$_GET['aw']][1],
-    //   ]);
-    // }else{
-    //   $award_numbers=find("award_number",[
-    //     "year"=>$_GET['year'],
-    //     "period"=>$_GET['period'],
-    //     "type"=>$award_type[$_GET['aw']][1],
-    //   ]);
-    // }
-    // echo "<pre>"; print_r($award_numbers); echo "</pre>";
 
-
-    echo "<h4>該期發票號碼</h4>";
+    echo "<h5>該期發票號碼</h5>";
     //抓出符合當期的發票號碼
     $invoices=all("invoice",[
       "year"=>$_GET['year'],
@@ -88,7 +82,6 @@ include "./com/base.php";
 
     // 比對兩個陣列的資料
     foreach($invoices as $ins){
-
 
       foreach($t_num as $tn){
 
@@ -107,20 +100,37 @@ include "./com/base.php";
 
         if(mb_substr($ins['number'],$start,$len) == $target_num){
           echo "<span style='color: red;font-size:20px;'>".$ins['number']."中獎了</span><br>";
+          $awardNum1[]=[$aw,$ins['number']];
         }
         else{
-          echo $ins['number']."沒中獎<br>";
+          // echo $ins['number']."沒中獎<br>";
         }
       }
     }
+    // echo "awardNum1<br>";
+    // echo "<pre>"; print_r($awardNum1); echo "<pre>";
+    // return $awardNum1;
 
-  ?>  
-  <hr>
+    echo "<br>======================================<br>";
+
+  }
+
+
+
+
+
+
   
   
-
+  
 
 
   
-</body>
-</html>
+
+
+  
+
+
+  
+
+?>

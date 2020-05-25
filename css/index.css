@@ -27,12 +27,12 @@
 .divNumber input[type=number]{
   width: 72%;
 }
-.btnBar{
+/* .btnBar{
   margin-top: 20px;
   text-align: center;
-}
+} */
 
-input[type=submit]{
+/* input[type=submit]{
   width: 150px;
   color: #fff;
   background-color: orange;
@@ -44,4 +44,4 @@ input[type=submit]:hover{
   color: orange;
   background-color: #fff;
   border: 1px solid orange;
-}
+} */

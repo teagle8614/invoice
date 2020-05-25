@@ -28,6 +28,10 @@
 .sideNav ul li{
   margin-bottom: 10px;
   text-align: center;
+  letter-spacing: 2px;
+}
+.sideNav ul li:last-child{
+  margin-bottom: 0;
 }
 .sideNav ul li a{
   color: #fff;
@@ -66,7 +70,7 @@
 }
 .listBox table tr:first-child{
   color: #fff;
-  background-color: rgb(180, 125, 218);
+  background-color: #b47dda;
 }
 .listBox table td{
   /* border: 1px solid #ddd; */
@@ -75,6 +79,9 @@
   width: 120px;
 }
 .listBox table td:nth-child(2){
+  width: 140px;
+}
+.listBox table td:nth-child(4){
   width: 140px;
 }
 .listBox table td:last-child{
@@ -106,11 +113,20 @@ select,input{
 .btnEdit{
   background-color: orange;
   border: 1px solid orange;
+  margin-bottom: 5px;
 }
 .btnEdit:hover{
   color: orange;
   background-color: #fff;
 }
+.btnDel{
+  background-color: #666;
+  border: 1px solid #666;
+} 
+.btnDel:hover{
+  color: #666;
+  background-color: #fff;
+} 
 .btnSave{
   background-color: orange;
   border: 1px solid orange;
@@ -121,10 +137,53 @@ select,input{
   background-color: #fff;
 } 
 .btnCancel{
-  background-color: orange;
-  border: 1px solid orange;
+  background-color: #ccc;
+  border: 1px solid #ccc;
 }
 .btnCancel:hover{
-  color: orange;
+  color: #ccc;
   background-color: #fff;
+}
+
+
+.overlay{
+  /* display: none; */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #333333dd;
+}
+.checkBox{
+  /* display: none; */
+  position: absolute;
+  width: 300px;
+  top: 50%;
+  left: 50%;
+  text-align: center;
+  transform: translate(-50%,-50%);
+  background-color: #fff;
+  padding: 30px;
+  font-size: 1.15rem;  
+  letter-spacing: 1.2px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  z-index: 10;
+}
+.checkBox .btn2{
+  width: 50px;
+  font-size: 1.25rem;
+}
+.checkBox .btnClose{
+  background-color: #ccc;
+  border: 1px solid #ccc;
+}
+.checkBox .btnClose:hover{
+  color: #ccc;
+  background-color: #fff;
+}
+.checkBox p{
+  font-size: 1.25rem;
+  margin-bottom: 15px;
 }

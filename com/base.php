@@ -56,7 +56,7 @@
       $sql=$sql . $arg[1];
     }
 
-    // echo $sql."<br><br>";
+    echo $sql."<br><br>";
     return $pdo->query($sql)->fetchAll();
   }
 
@@ -78,7 +78,6 @@
       }
       $sql="update $table set " .implode(',',$tmp). " where `id`='".$arg['id']."' ";
     }else{
-
       // insert
       $sql="insert into $table (`".implode("`,`",array_keys($arg)). "`) values('".implode("','",$arg)."')";
     }

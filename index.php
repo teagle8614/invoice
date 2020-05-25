@@ -31,7 +31,7 @@ $p=ceil(date("n")/2);
           <tr>
             <td>年份</td>
             <td>
-              <select name="year" onchange="location=this.value;">
+              <select name="year">
                 <?php
                   $yToday = date("Y");
                   $y1=$yToday-4;
@@ -71,7 +71,7 @@ $p=ceil(date("n")/2);
           </tr>
         </table>
         <div class="btnBar">
-          <input type="submit" value="儲存">
+          <input class="btn2" type="submit" value="儲存">
         </div>
       </form>
     </div>

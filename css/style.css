@@ -13,9 +13,35 @@ a{
 .btn{
   display: inline-block;
   width: 100%;
+  color: #fff;
+  background-color: orange;
   padding: 3px 15px;
   border-radius: 5px;
 }
+.btn:hover{
+  color: orange;
+  background-color: #fff;
+}
+.btn2{
+  display: inline-block;
+  width: 150px;
+  color: #fff;
+  background-color: orange;
+  margin: 0 auto;
+  padding: 8px 0;
+  text-align: center;
+  border-radius: 5px;
+  border: 1px solid orange;
+}
+.btn2:hover{
+  color: orange;
+  background-color: #fff;
+}
+.btnBar{
+  margin-top: 20px;
+  text-align: center;
+}
+
 ul li{
   list-style: none;
 }
@@ -28,7 +54,8 @@ select,input{
   font-size: 1rem;
   letter-spacing: 1.5px;
 }
-input[type=submit]{
+input[type=submit],
+input[type=reset]{
   height: auto;
   cursor: pointer;
 }
@@ -46,7 +73,7 @@ table tr td{
   width: 1000px;
   margin: 0 auto;
   border-radius: 10px;
-  overflow: hidden;
+  /* overflow: hidden; */
   border: 1px solid #ddd;
 }
 
@@ -109,6 +136,7 @@ table tr td{
   margin: 3px;
 }
 .pageNav ul li a{
+  color: #333;
   padding: 5px 10px;
   /* border: 1px solid #ddd; */
 }

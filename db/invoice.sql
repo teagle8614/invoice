@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2020-05-14 18:50:53
+-- 產生時間： 2020-05-24 19:19:49
 -- 伺服器版本： 10.4.11-MariaDB
 -- PHP 版本： 7.4.3
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `invoice` (
-  `id` int(10) UNSIGNED NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL COMMENT '流水號',
   `code` varchar(2) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '英文碼',
   `number` varchar(8) COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '發票號碼',
   `period` tinyint(1) UNSIGNED NOT NULL COMMENT '期別',
@@ -43,7 +43,7 @@ CREATE TABLE `invoice` (
 
 INSERT INTO `invoice` (`id`, `code`, `number`, `period`, `expend`, `year`) VALUES
 (1, 'LB', '123132', 2, 0, '2020'),
-(2, 'LG', '145632', 3, 205, '2020'),
+(2, 'LG', '14888886', 3, 205, '2020'),
 (3, 'QQ', '88888887', 6, 305, '2019'),
 (4, 'AA', '44444444', 1, 540, '2020'),
 (5, 'WQ', '48515654', 1, 240, '2020'),
@@ -52,7 +52,7 @@ INSERT INTO `invoice` (`id`, `code`, `number`, `period`, `expend`, `year`) VALUE
 (8, 'NG', '17753978', 2, 308, '2020'),
 (9, 'ZX', '45896873', 3, 550, '2020'),
 (10, 'JU', '46250120', 3, 98, '2020'),
-(11, 'GH', '58870345', 3, 0, '2020'),
+(11, 'GH', '58444444', 3, 111, '2020'),
 (12, 'UH', '12345003', 4, 78, '2020'),
 (13, 'KJ', '12475466', 4, 123, '2020'),
 (14, 'FS', '45123698', 2, 53, '2020'),
@@ -66,10 +66,19 @@ INSERT INTO `invoice` (`id`, `code`, `number`, `period`, `expend`, `year`) VALUE
 (22, 'HG', '41555425', 5, 156, '2020'),
 (23, 'AA', '26596640', 5, 489, '2020'),
 (24, 'JG', '54462950', 1, 156, '2020'),
-(25, 'JY', '22156884', 4, 1566, '2019'),
-(26, 'HJ', '15696602', 5, 154, '2019'),
-(27, 'QQ', '26456123', 3, 120, '2019'),
-(28, 'DC', '56212358', 5, 65, '2020');
+(28, 'DC', '56212358', 5, 65, '2020'),
+(29, 'TT', '45789815', 3, 300, '2020'),
+(30, 'AA', '78451296', 3, 100, '2020'),
+(31, 'BB', '02154876', 3, 200, '2020'),
+(32, 'CC', '89651502', 3, 300, '2020'),
+(33, 'CC', '09651502', 3, 300, '2020'),
+(34, 'CC', '00651502', 3, 300, '2020'),
+(35, 'DD', '00020012', 3, 123, '2020'),
+(36, 'DD', '00000012', 3, 321, '2020'),
+(37, 'GB', '11111201', 3, 451, '2020'),
+(38, 'TT', '12121512', 3, 156, '2020'),
+(39, 'HG', '78784487', 3, 614, '2020'),
+(40, 'SF', '45612210', 3, 892, '2020');
 
 --
 -- 已傾印資料表的索引
@@ -89,7 +98,7 @@ ALTER TABLE `invoice`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `invoice`
 --
 ALTER TABLE `invoice`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '流水號', AUTO_INCREMENT=41;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

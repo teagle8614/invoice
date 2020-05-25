@@ -35,14 +35,16 @@ if($p==0){
 
 // 編輯狀態
 $id="";
+$status="";
 $cssDisplay="inline-block";
 if(isset($_GET['id'])){
   $id=$_GET['id'];
-  $cssDisplay="none";
-
-  $sql2="select * from `invoice` where `id`='$id'";
-  echo $sql2."<br>";
-  $item=$pdo->query($sql2)->fetch();
+}
+if(isset($_GET['status'])){
+  $status=$_GET['status'];
+  if($status=="edit"){
+    $cssDisplay="none";
+  }
 }
 ?>
 
@@ -56,9 +58,11 @@ if(isset($_GET['id'])){
   <link rel="stylesheet" href="./css/list.css">
   <style>
     /* 當有項目在編輯時，將其他編輯按鈕隱藏 */
-    a.btnEdit{
+    a.btnEdit,
+    a.btnDel{
       display: <?=$cssDisplay;?>;
     }
+    
   </style>
 </head>
 <body>
@@ -102,9 +106,9 @@ if(isset($_GET['id'])){
               echo "<h3>".$y."年-".($p*2-1).",".($p*2)."月</h3>";
             }
           ?>
-          
           <p>共有<?php echo $dbCount;?>筆</p>
         </div>
+
 
         <form action="update_invoice.php" method="post">
           <table>
@@ -117,8 +121,9 @@ if(isset($_GET['id'])){
             </tr>
             <?php
               foreach($rows as $row){
-                if($row['id']==$id){
-
+                
+                if($row['id']==$id && $status=="edit"){
+                  // 編輯
                   echo "<tr class='item".$row['id']." itemEdit'>";
                   echo "  <td>";
                   echo "    <select name='year'>";
@@ -138,13 +143,13 @@ if(isset($_GET['id'])){
                   echo "  </td>";
                   echo "  <td>";
                   echo "    <div class='divNumber'>";
-                  echo "      <input type='text' name='code' placeholder='英文2碼' maxlength='2' value='".$item['code']."' required>";
-                  echo "      <input type='number' name='number' placeholder='數字8碼' maxlength='8' value='".$item['number']."' required>";
+                  echo "      <input type='text' name='code' placeholder='英文2碼' maxlength='2' value='".$row['code']."' required>";
+                  echo "      <input type='number' name='number' placeholder='數字8碼' maxlength='8' value='".$row['number']."' required>";
                   echo "    </div>";
                   echo "  </td>";
                   echo "  <td>";
-                  echo "    <input type='number' name='expend' value='".$item['expend']."' required>";
-                  echo "    <input type='hidden' name='id' value='".$item['id']."'>";
+                  echo "    <input type='number' name='expend' value='".$row['expend']."' required>";
+                  echo "    <input type='hidden' name='id' value='".$row['id']."'>";
                   echo "    <input type='hidden' name='y' value='$y'>";
                   echo "    <input type='hidden' name='p' value='$p'>";
                   echo "  </td>";
@@ -155,6 +160,7 @@ if(isset($_GET['id'])){
                   echo "</tr>";
 
                 }else{
+                  // 顯示
                   echo "<tr class='item".$row['id']."'>";
                   echo "  <td>".$row['year'] ."</td>";
                   echo "  <td>".($row['period']*2-1).",".($row['period']*2)."月</td>";
@@ -162,7 +168,9 @@ if(isset($_GET['id'])){
                   echo "  <td>".$row['expend'] ."</td>";
                   echo "  <td>";
                   // echo "    <a class='btn' href='edit_test.php?id=".$row['id']."'>編輯</a>";
-                  echo "    <a class='btn btnEdit' href='list.php?y=$y&p=$p&id=".$row['id']."'>編輯</a>";
+                  echo "    <a class='btn btnEdit' href='list.php?y=$y&p=$p&id=".$row['id']."&status=edit'>編輯</a>";
+                  // echo "    <a class='btn btnDel' href='javascript:void(0);' onclick='dialog_del(".$row['id'].");'>刪除</a>";
+                  echo "    <a class='btn btnDel' href='list.php?y=$y&p=$p&id=".$row['id']."&status=del'>刪除</a>";
                   echo "  </td>";
                   echo "</tr>";
                 }
@@ -170,6 +178,23 @@ if(isset($_GET['id'])){
             ?>
           </table>
         </form>
+
+        <?php
+          if($status=="del"){
+            echo "<div class='overlay'></div>";
+            echo "<div class='checkBox'>";
+            echo "  <form action='del_invoice.php' method='post'>";
+            echo "    <p>確認刪除該筆資料?</p>";
+            echo "    <input type='hidden' name='id' value='$id'>";
+            echo "    <input type='hidden' name='y' value='$y'>";
+            echo "    <input type='hidden' name='p' value='$p'>";
+            echo "    <input class='btn2 btnOK' type='submit' value='是'>";
+            echo "    <a class='btn2 btnClose' href='list.php?y=$y&p=$p'>否</a>";
+            echo "  </form>";
+            echo "</div>";
+          }
+        ?>
+
 
         <div class="pageNav">
           <ul>
@@ -186,5 +211,23 @@ if(isset($_GET['id'])){
       </div>
     </div>
   </div>
+
+  <script src="plugins/jquery-3.5.1.min.js"></script>
+  <script>
+
+
+    // $(".btnDel").click(function(){
+    //   $(".listBox .overlay").fadeTo(500, 1);
+    //   $(".listBox .checkBox").fadeTo(500, 1);
+    // });
+    $(".checkBox .btnClose").click(function(){
+      $(".listBox .overlay").fadeOut(100);
+      $(".listBox .checkBox").fadeOut(100);
+    });
+    // $(".overlay").click(function(){
+    //   $(".listBox .overlay").fadeOut(100);
+    //   $(".listBox .checkBox").fadeOut(100);
+    // });
+  </script>
 </body>
 </html>
