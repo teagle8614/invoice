@@ -5,7 +5,7 @@
   $aw=$_GET['aw'];
   $arrayPrev=[]; //前一個獎項的中獎號碼
   $arrayNext=[]; //當前獎項的中獎號碼
-  $array=[];
+  $arrayAward=[];
  
   /**
    * 將頭獎~六獎分開處理
@@ -17,23 +17,31 @@
   for($i=8;$i>=3;$i--){
     func_award($i);
   }
+  echo "<br>---------------finally---------------<br>";
+  echo "<pre>"; print_r($arrayAward); echo "<pre>";
   
+  // to("award_list.php?list=$arrayAward");
+
+  $serialized_array = serialize($arrayAward);
+  echo "<a href='award_list.php?list=".$serialized_array."'>GO</a>";
 
   
   
-
+  
+  
+  
   function func_award($aw){
     echo "AAAAA:".$aw."<br>";
     global $arrayPrev; //多
     global $arrayNext; //少
-    global $array;
+    global $arrayAward;
     $awardNum1=[];
     echo "arrayPrevaaaa<br>";
     echo "<pre>"; print_r($arrayPrev); echo "<pre>";
     echo "arrayNextaaa<br>";
     echo "<pre>"; print_r($arrayNext); echo "<pre>";
-    echo "arrayaaa<br>";
-    echo "<pre>"; print_r($array); echo "<pre>";
+    echo "arrayAwardaaa<br>";
+    echo "<pre>"; print_r($arrayAward); echo "<pre>";
     echo "<hr>";
     // 將當前獎項的中獎號碼改為前一個獎項的中獎號碼
     $arrayPrev=$arrayNext;
@@ -43,8 +51,8 @@
     echo "<pre>"; print_r($arrayPrev); echo "<pre>";
     echo "arrayNextaaa<br>";
     echo "<pre>"; print_r($arrayNext); echo "<pre>";
-    echo "arrayaaa<br>";
-    echo "<pre>"; print_r($array); echo "<pre>";
+    echo "arrayAwardaaa<br>";
+    echo "<pre>"; print_r($arrayAward); echo "<pre>";
 
     // $award_type=[
     //   // 獎別,第幾獎,需對獎的碼數
@@ -101,15 +109,26 @@
 
 
     echo "<h5>該期發票號碼</h5>";
-    $invoices=all("invoice",[
-      "year"=>$_GET['year'],
-      "period"=>$_GET['period']
-    ]);
+    if($aw==8){
+      $invoices=all("invoice",[
+        "year"=>$_GET['year'],
+        "period"=>$_GET['period']
+      ]);
+    }else{
+      // $invoices=$arrayPrev;
+      if(!empty($arrayPrev)){
+        foreach($arrayPrev as $a){
+          $invoices[]=[
+            "number" => $a
+          ];
+        }
+      }
+    }
 
-    // echo "<br>-----------------------------------------------------------------<br>";
-    // echo "invoices<br>";
-    // echo "<pre>"; print_r($invoices); echo "<pre>";
-    // echo "<br>-----------------------------------------------------------------<br>";
+    echo "<br>-----------------------------------------------------------------<br>";
+    echo "invoices<br>";
+    echo "<pre>"; print_r($invoices); echo "<pre>";
+    echo "<br>-----------------------------------------------------------------<br>";
     // $temp="";
     foreach($invoices as $ins){
       foreach($t_num as $tn){
@@ -121,7 +140,6 @@
 
         if(mb_substr($ins['number'],$start,$len) == $target_num){
           echo "<span style='color: red;font-size:20px;'>".$ins['number']."中獎了</span><br>";
-
           // 將中獎的元素存入$arrayNext內
           $arrayNext[]=$ins['number'];
         }
@@ -142,19 +160,32 @@
     // 將$temp的元素存入$array中，並將獎別一同存入
     foreach($temp as $t){
       echo "t:".$t."<br>";
-      $array[]=[
+      $arrayAward[]=[
         "type" => $aw+1,
         "number" => $t
       ];
     }
+
+    // 若有頭獎時，則將頭獎的獎號也放入array中
+    if($aw==3 && !empty($arrayNext)){
+      foreach($arrayNext as $n){
+        echo "n:".$n."<br>";
+        $arrayAward[]=[
+          "type" => 3,
+          "number" => $n
+        ];
+      }
+    }
+
+
 
 
     echo "arrayPrev<br>";
     echo "<pre>"; print_r($arrayPrev); echo "<pre>";
     echo "arrayNext<br>";
     echo "<pre>"; print_r($arrayNext); echo "<pre>";
-    echo "array<br>";
-    echo "<pre>"; print_r($array); echo "<pre>";
+    echo "arrayAward<br>";
+    echo "<pre>"; print_r($arrayAward); echo "<pre>";
     echo "<br>======================================<br>";
 
   }

@@ -12,9 +12,6 @@ if(isset($_GET['p'])){
   $p=$_GET['p'];
 }
 
-
-
-
 // $num1=find('award_number',['period'=>$p,'year'=>$y,'type'=>1]);
 // $num2=find('award_number',['period'=>$p,'year'=>$y,'type'=>2]);
 // $num3=all('award_number',['period'=>$p,'year'=>$y,'type'=>3]);
@@ -30,26 +27,21 @@ $type=[
 function func_award($num){
   global $y;
   global $p;
-  // echo "num:".$num."<br>";
   switch($num){
     case 1:
       // 特別獎
-      // echo "test1<br>";
       $rows=all('award_number',['period'=>$p,'year'=>$y,'type'=>1]);
       break;
     case 2:
       // 特獎
-      // echo "test2<br>";
       $rows=all('award_number',['period'=>$p,'year'=>$y,'type'=>2]);
       break;
     case 3:
       // 頭獎
-      // echo "test3<br>";
       $rows=all('award_number',['period'=>$p,'year'=>$y,'type'=>3]);
       break;
     case 4:
       // 加開四獎
-      // echo "test4<br>";
       $rows=all('award_number',['period'=>$p,'year'=>$y,'type'=>4]);
   }
   
@@ -63,6 +55,11 @@ $cssDisplay="inline-block";
 if(isset($_GET['id'])){
   $id=$_GET['id'];
   $cssDisplay="none";
+}
+// 全部刪除
+$status="";
+if(isset($_GET['status'])){
+  $status=$_GET['status'];
 }
 
 // 讀取表格資料
@@ -152,7 +149,6 @@ if(isset($_GET['id'])){
                 foreach($rows as $row){
                   if($row['id']==$id){
                     // 編輯
-                    // echo "編輯<br>";
                     echo "<tr class='item".$row['id']." itemEdit'>";
                     echo "  <td>";
                     echo "    <select name='year'>";
@@ -185,7 +181,6 @@ if(isset($_GET['id'])){
                   }
                   else{
                     // 顯示
-                    // echo "顯示<br>";
                     echo "<tr class='item".$row['id']."'>";
                     echo "  <td>".$row['year'] ."</td>";
                     echo "  <td>".($row['period']*2-1).",".($row['period']*2)."月</td>";
@@ -200,77 +195,42 @@ if(isset($_GET['id'])){
                 }
               } 
             ?>
-            <!-- <tr>
-              <td>2020</td>
-              <td>1、2月</td>
-              <td>特別獎</td>
-              <td>
-                <?php
-                // foreach($num1 as $n){
-                //   if(!empty($n['number'])){
-                //     echo "<p>".$n['number']."</p>";
-                //   }
-                // }
-                  // if(!empty($num1['number'])){
-                  //   echo $num1['number'];
-                  // }
-                ?>
-              </td>
-              <td><a class="btn btnEdit" href="#">編輯</a></td>
-            </tr>
-            <tr>
-              <td>2020</td>
-              <td>1、2月</td>
-              <td>特獎</td>
-              <td>
-                <?php
-                // foreach($num2 as $n){
-                //   if(!empty($n['number'])){
-                //     echo "<p>".$n['number']."</p>";
-                //   }
-                // }
-                  // if(!empty($num2['number'])){
-                  //   echo $num2['number'];
-                  // }
-                ?>
-              </td>
-              <td><a class="btn btnEdit" href="#">編輯</a></td>
-            </tr>
-            <tr>
-              <td>2020</td>
-              <td>1、2月</td>
-              <td>頭獎</td>
-              <td>
-                <?php
-                  // foreach($num3 as $n){
-                  //   if(!empty($n['number'])){
-                  //     echo "<p>".$n['number']."</p>";
-                  //   }
-                  // }
-                ?>
-              </td>
-              <td><a class="btn btnEdit" href="#">編輯</a></td>
-            </tr>
-            <tr>
-              <td>2020</td>
-              <td>1、2月</td>
-              <td>增開六獎</td>
-              <td>
-                <?php
-                  // foreach($num4 as $n){
-                  //   if(!empty($n['number'])){
-                  //     echo "<p>".$n['number']."</p>";
-                  //   }
-                  // }
-                ?>
-              </td>
-              <td><a class="btn btnEdit" href="#">編輯</a></td>
-            </tr> -->
           </table>
-          <div class="btnBar">
-            <a class="btn2 btnDelAll" href="#">全部刪除</a>
-          </div> 
+          <?php
+            $table="award_number";
+            $data=[
+              'year' => $y,
+              'period' => $p
+            ];
+            $count=nums($table,$data);
+
+            // 沒有獎號則不顯示刪除按鈕
+            if($count>0){
+              echo "<div class='btnBar'>";
+              echo "  <a class='btn2 btnDelAll' href='query.php?y=$y&p=$p&status=del'>全部刪除</a>";
+              echo "</div>";
+            }else{
+              echo "<p class='tip'>尚無資料!</p>";
+            }
+          ?>
         </form>
+            
+
+        <?php
+          // 刪除的提示視窗
+          if($status=="del"){
+            echo "<div class='overlay'></div>";
+            echo "<div class='checkBox'>";
+            echo "  <form action='del_query.php' method='post'>";
+            echo "    <p>確認刪除該期的全部獎號?</p>";
+            echo "    <input type='hidden' name='y' value='$y'>";
+            echo "    <input type='hidden' name='p' value='$p'>";
+            echo "    <input class='btn2 btnOK' type='submit' value='是'>";
+            echo "    <a class='btn2 btnClose' href='query.php?y=$y&p=$p'>否</a>";
+            echo "  </form>";
+            echo "</div>";
+          }
+        ?>
 
       </div>
 

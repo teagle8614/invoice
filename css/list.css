@@ -10,17 +10,6 @@
   min-width: 150px;
   border-right: 1px solid #ddd;
 }
-/* .sideNav::before{
-  content: '';
-  position: absolute;
-  top: calc(50% - 10px);
-  left: 180px;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 20px 0 20px 20px;
-  border-color: transparent transparent transparent orange;
-} */
 .sideNav select{
   font-size: 1.15rem;
   margin-bottom: 20px;
@@ -50,20 +39,14 @@
 }
 
 
-
 .listBox{
   width: 100%;
-  /* margin: 0 auto; */
 }
 .topBar{
   display: flex;
   margin-bottom: 20px;
   padding: 0 2px;
   justify-content: space-between;
-}
-.listBox table{
-  /* border-radius: 10px; */
-  /* overflow: hidden; */
 }
 .listBox table tr:nth-child(odd){
   background-color: #eee;

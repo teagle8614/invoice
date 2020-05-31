@@ -56,7 +56,7 @@
       $sql=$sql . $arg[1];
     }
 
-    echo $sql."<br><br>";
+    // echo $sql."<br><br>";
     return $pdo->query($sql)->fetchAll();
   }
 

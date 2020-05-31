@@ -1,0 +1,70 @@
+.body{
+  position: relative;
+}
+.invoiceBox{
+  /* display: flex; */
+}
+.invoiceBox > div{
+  padding: 20px;
+}
+
+.listBox{
+  width: 100%;
+}
+.topBar{
+  display: flex;
+  margin-bottom: 20px;
+  padding: 0 2px;
+  justify-content: space-between;
+}
+.topBar .btnDesc{
+  color: #000;
+}
+.topBar .btnDesc:hover{
+  color: blue;
+}
+.tip{
+  color: red;
+  margin-top: 30px;
+  text-align: center;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+
+/* --- 表格 --- */
+table{
+  width: 100%;
+}
+table tr:first-child{
+  color: #fff;
+  background-color: #b47dda;
+}
+table td{
+  border-bottom: 1px solid #ddd;
+}
+table tr:first-child td{
+  border: 1px solid #b47dda;
+}
+table td p{
+  margin-bottom: 10px;
+}
+table td p:last-child{
+  margin-bottom: 0;
+}
+.btnAward{
+  color: #fff;
+  background-color: orange;
+  border: 1px solid orange;
+}
+.btnAward:hover{
+  color: orange;
+  background-color: #fff;
+}
+
+.total{
+  padding: 15px 15px 0 0;
+  text-align: right;
+  font-size: 1.25rem;
+  font-weight: bold;
+}

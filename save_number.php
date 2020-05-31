@@ -15,64 +15,78 @@
   $table="award_number";
   $year=$_POST['year'];
   $period=$_POST['period'];
-
-  // 儲存特別獎
-  $num1=$_POST['num1'];
   $data=[
-    "year"   => $year,
-    "period" => $period,
-    "number" => $num1,
-    "type"   => 1
+    'year' => $year,
+    'period' => $period
   ];
-  $res1=save($table,$data);
 
-  // 儲存特獎
-  $num2=$_POST['num2'];
-  $data=[
-    "year"   => $year,
-    "period" => $period,
-    "number" => $num2,
-    "type"   => 2
-  ];
-  $res2=save($table,$data);
 
-  // 儲存頭獎
-  $num3=$_POST['num3'];
-  foreach($num3 as $n){
-    $data=[
-      "year"   => $year,
-      "period" => $period,
-      "number" => $n,
-      "type"   => 3
-    ];
-    // number為空值時不存入
-    if($n!=""){
-      $res3=save($table,$data);
-    }
-  }
-  
-
-  // 儲存增開六碼
-  $num4=$_POST['num4'];
-  foreach($num4 as $n){
-    $data=[
-      "year"   => $year,
-      "period" => $period,
-      "number" => $n,
-      "type"   => 4
-    ];
-    // number為空值時不存入
-    if($n!=""){
-      $res4=save($table,$data);
-    }
-  }
-
-  // 導回對獎頁
-  if($res1>0 && $res2>0 && $res3>0 && $res4>0){
-    to("invoice.php?status=true"); 
+  $count=nums($table,$data);
+  if($count>0){
+    // 已有資料
+    echo "已有資料";
+    to("invoice.php?check=true&y=$year&p=$period"); 
   }else{
-    to("invoice.php?status=false"); 
+    // 尚未有資料
+    echo "尚未有資料";
+ 
+
+    // 儲存特別獎
+    $num1=$_POST['num1'];
+    $data=[
+      "year"   => $year,
+      "period" => $period,
+      "number" => $num1,
+      "type"   => 1
+    ];
+    $res1=save($table,$data);
+
+    // 儲存特獎
+    $num2=$_POST['num2'];
+    $data=[
+      "year"   => $year,
+      "period" => $period,
+      "number" => $num2,
+      "type"   => 2
+    ];
+    $res2=save($table,$data);
+
+    // 儲存頭獎
+    $num3=$_POST['num3'];
+    foreach($num3 as $n){
+      $data=[
+        "year"   => $year,
+        "period" => $period,
+        "number" => $n,
+        "type"   => 3
+      ];
+      // number為空值時不存入
+      if($n!=""){
+        $res3=save($table,$data);
+      }
+    }
+    
+    // 儲存增開六碼
+    $num4=$_POST['num4'];
+    foreach($num4 as $n){
+      $data=[
+        "year"   => $year,
+        "period" => $period,
+        "number" => $n,
+        "type"   => 4
+      ];
+      // number為空值時不存入
+      if($n!=""){
+        $res4=save($table,$data);
+      }
+    }
+
+    // 導回對獎頁
+    if($res1>0 && $res2>0 && $res3>0 && $res4>0){
+      to("invoice.php?status=true"); 
+    }else{
+      to("invoice.php?status=false"); 
+    }
   }
-  
   
 ?>

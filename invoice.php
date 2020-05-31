@@ -4,9 +4,7 @@ $y=date("Y");
 // 期別
 $p=ceil(date("n")/2);
 
-$status="";
-if(isset($_GET['status'])){
-  $status=$_GET['status'];
+if(isset($_GET['status']) || isset($_GET['check'])){
   // css
   $tipDisplay="block";
   $boxDisplay="none";
@@ -41,15 +39,27 @@ if(isset($_GET['status'])){
 
     <div class="tipBox">
        <?php
+        if(isset($_GET['check']) && $_GET['check']=="true"){
+          $y=$_GET['y'];
+          $p=$_GET['p'];
+
+          echo "<h3 class='tip'>該期獎號已存在！</h3>";
+          echo "<p class='tip'>請善用修改或是刪除的功能</p>";
+          echo "<a class='btn2 btnGO' href='query.php?y=$y&p=$p'>前往查詢獎號頁</a>";
+          echo "<a class='btn2' href='invoice.php'>重新輸入</a>";
+        }
+
+        // 確認是否資料已存在
         if(isset($_GET['status'])){
           if($_GET['status']=="true"){
-            echo '<h3 class="tip">資料新增成功!</h3>';
+            echo "<h3 class='tip'>資料新增成功!</h3>";
           }else{
-            echo '<h3 class="tip">資料部分有誤!</h3>';
+            echo "<h3 class='tip'>資料部分有誤!</h3>";
           }
+          echo "<a class='btn2' href='invoice.php'>繼續輸入</a>";
         }
        ?>
-      <a class="btn2" href="invoice.php">繼續輸入</a>
+      
     </div>
 
 

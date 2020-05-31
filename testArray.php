@@ -87,5 +87,34 @@ print_r( $c);
 foreach($c as $n){
   echo "c1:".$n."<br>";
 }
+echo "<hr>";
 
+
+
+$k1=[
+  ["a" => "aaa","b" => "111"],
+  ["a" => "bbb","b" => "222"],
+  ["a" => "ccc","b" => "333"]
+];
+$k2=[
+  ["a" => "aaa","b" => "111"],
+  ["a" => "bbb1","b" => "222"],
+  ["a" => "ccc1","b" => "3333"]
+];
+echo "k:<br>";
+echo "<pre>"; print_r($k1); echo "<pre>";
+echo "<pre>"; print_r($k2); echo "<pre>";
+// $k =  array_diff($k1, $k2);
+foreach($k1 as $kkk1){
+  foreach($k2 as $kkk2){
+    // echo "kkk1<br>";
+    // echo "<pre>"; print_r($kkk1); echo "<pre>";
+    // echo "kkk2<br>";
+    // echo "<pre>"; print_r($kkk2); echo "<pre>";
+    $k =  array_diff($kkk1, $kkk2);
+    echo "<pre>"; print_r($k); echo "<pre>";
+    echo "<br>-------------------<br>";
+  }
+}
+echo "<pre>"; print_r($k); echo "<pre>";
 ?>

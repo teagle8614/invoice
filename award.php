@@ -17,14 +17,6 @@ $num2=find('award_number',['period'=>$p,'year'=>$y,'type'=>2]);
 $num3=all('award_number',['period'=>$p,'year'=>$y,'type'=>3]);
 $num4=all('award_number',['period'=>$p,'year'=>$y,'type'=>4]);
 
-// 讀取表格資料
-// if($p==0){
-//   // 搜尋該年度全部資料
-//   $rows=all("award_number",['year'=>$y]);
-// }else{
-//   // 搜尋該年度當期資料
-//   $rows=all("award_number",['year'=>$y,"period"=>$p]);
-// }
 
 ?>
 
@@ -46,15 +38,7 @@ $num4=all('award_number',['period'=>$p,'year'=>$y,'type'=>4]);
       $navPage="3";
       include "./include/header.php"; 
     ?>
-    <!-- 
-      開獎時間
-      1、2月    3/25  13:30
-      3、4月    5/25  13:30
-      5、6月    7/25  13:30
-      7、8月    9/25  13:30
-      9、10月   11/25 13:30
-      11、12月  1/25  13:30
-     -->
+
 
     <div class="invoiceBox">
 
@@ -234,7 +218,7 @@ $num4=all('award_number',['period'=>$p,'year'=>$y,'type'=>4]);
             </tr>
           </table>
           <div class="btnBar">
-            <a class="btn2" href="award_number2.php?aw=0&year=<?=$y;?>&period=<?=$p;?>">全部對獎</a>
+            <a class="btn2" href="award_number.php?aw=0&year=<?=$y;?>&period=<?=$p;?>">全部對獎</a>
           </div> 
         </form>
 

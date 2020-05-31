@@ -57,12 +57,11 @@ if(isset($_GET['status'])){
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/list.css">
   <style>
-    /* 當有項目在編輯時，將其他編輯按鈕隱藏 */
+    /* 當有項目在編輯時，將其他編輯與刪除按鈕隱藏 */
     a.btnEdit,
     a.btnDel{
       display: <?=$cssDisplay;?>;
     }
-    
   </style>
 </head>
 <body>

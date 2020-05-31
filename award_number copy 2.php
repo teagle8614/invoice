@@ -4,8 +4,7 @@
   include "./com/base.php";
   
   $aw=$_GET['aw'];
-  $y=$_GET['year'];
-  $p=$_GET['period'];
+
   $award=[]; //存放所有獎號
   $arrayPrev=[]; //前一個獎項的中獎號碼
   $arrayNext=[]; //當前獎項的中獎號碼
@@ -38,60 +37,22 @@
     }
   }
 
-  // echo "<br>----------------------------------------------<br>";
-  // echo "award<br>";
-  // echo "<pre>"; print_r($award); echo "<pre>";
-  // echo "<br>----------------------------------------------<br>";  
-  // $serialized_array = serialize($award);
-  // to("award_list.php?y=".$y."&p=".$p."&list=$serialized_array");
-
-
-  // 資料存進去前先清空資料表
-  $table="reward_record";
-  $count=nums($table);
-  if($count>0){
-    $sql="TRUNCATE TABLE $table";
-    $pdo->exec($sql);
-  }
+  echo "<br>----------------------------------------------<br>";
+  echo "award<br>";
+  echo "<pre>"; print_r($award); echo "<pre>";
+  echo "<br>----------------------------------------------<br>";
   
-  // 將資料存入資料庫
-  foreach($award as $a){
-    $row=find("invoice",['year'=>$y,'period'=>$p,'number'=>$a['number']]);
-      // echo "<pre>"; print_r($row); echo "<pre>";
-      // 調整獎號順序，由大至小
-    $award_type2=[
-      1=>["特別獎",1],
-      2=>["特獎",2],
-      4=>["頭獎",3],
-      5=>["二獎",4],
-      6=>["三獎",5],
-      7=>["四獎",6],
-      8=>["五獎",7],
-      9=>["六獎",8],
-      3=>["增開六獎",9]
-    ];
-    $index=$a['type'];
-    $data=[
-      'year' => $y,
-      'period' => $p,
-      'code' =>  $row['code'],
-      'number' => $a['number'],
-      'expend' => $row['expend'],
-      'reward' => $award_type2[$index][1]
-    ];
-    save($table,$data);
-  }
-  // 導向中獎頁
-  to("award_list.php");
+  
+  $serialized_array = serialize($award);
+  to("award_list.php?y=".$_GET['year']."&p=".$_GET['period']."&list=$serialized_array");
+
 
 
 
 
   
-  // 對獎
+
   function func_award($aw){
-    global $y;
-    global $p;
     global $award;
     global $arrayPrev;
     global $arrayNext;
@@ -119,18 +80,19 @@
       6=>["三獎",3,6],
       7=>["四獎",3,5],
       8=>["五獎",3,4],
-      9=>["六獎",3,3]
+      9=>["六獎",3,3],
+     
     ];
 
     echo "獎別：".$award_type[$aw][0]."<br>";
-    echo "年份：".$y."<br>";
-    echo "期別：".$p."<br>";
+    echo "年份：".$_GET['year']."<br>";
+    echo "期別：".$_GET['period']."<br>";
     echo "對獎的碼數：".$award_type[$aw][2]."<br>";
 
     // 獎號數量
     $award_nums=nums("award_number",[
-      "year"=>$y,
-      "period"=>$p,
+      "year"=>$_GET['year'],
+      "period"=>$_GET['period'],
       "type"=>$award_type[$aw][1],
     ]);
     echo "獎號數量：".$award_nums;
@@ -139,8 +101,8 @@
 
     echo "<h5>對獎獎號</h5>";
     $award_number=all("award_number",[
-      "year"=>$y,
-      "period"=>$p,
+      "year"=>$_GET['year'],
+      "period"=>$_GET['period'],
       "type"=>$award_type[$aw][1],
     ]);
     
@@ -157,8 +119,8 @@
     // 特殊獎、特獎、增開六獎、六獎
     if($aw<=3 || $aw==9){
       $invoices=all("invoice",[
-        "year"=>$y,
-        "period"=>$p
+        "year"=>$_GET['year'],
+        "period"=>$_GET['period']
       ]);
     }else{
       // 頭獎~五獎 將前個中獎的獎號放入陣列中
