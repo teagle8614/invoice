@@ -119,26 +119,21 @@
 
 
 /* --- 表格 --- */
-.listBox form table tr:first-child{
+.listTable tr:first-child{
   color: #fff;
   background-color: #b47dda;
 }
-.listBox form table td{
+.listTable td{
   border: 1px solid #ddd;
+  width: 33%;
 }
-.listBox form table tr:first-child td{
+.listTable tr:first-child td{
   border: 1px solid #b47dda;
 }
-.listBox form table td:nth-child(2){
-  width: 250px;
-}
-.listBox form table td:last-child{
-  width: 90px;
-}
-.listBox form table td p{
+.listTable td p{
   margin-bottom: 10px;
 }
-.listBox form table td p:last-child{
+.listTable td p:last-child{
   margin-bottom: 0;
 }
 .btnAward{

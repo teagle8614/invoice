@@ -53,7 +53,7 @@
         ?>
       </table>
       <?php
-         echo "<p class='total'>共".$countNum."筆，".$countBouns."元</p>";
+         echo "<p class='total'>共".$countNum."張，".$countBouns."元</p>";
          }else{
           echo "<p class='tip'>這次沒有中獎!請再接再厲!</p>";
         }

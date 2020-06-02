@@ -36,6 +36,9 @@
 table{
   width: 100%;
 }
+table tr:nth-child(odd){
+  background-color: #eee;
+}
 table tr:first-child{
   color: #fff;
   background-color: #b47dda;

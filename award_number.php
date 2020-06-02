@@ -3,7 +3,6 @@
   ob_start();
   include "./com/base.php";
   
-  $aw=$_GET['aw'];
   $y=$_GET['year'];
   $p=$_GET['period'];
   $award=[]; //存放所有獎號

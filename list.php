@@ -16,15 +16,10 @@ if(isset($_GET['p'])){
 // 讀取表格資料
 if($p==0){
   // 搜尋該年度全部資料
-  
-  // $sql="select * from `invoice` where `year`='$y' order by `period`,`id` ASC";
-  // $sqlCount="select count(*) from `invoice` where `year`='$y'";
   $rows=all("invoice",['year'=>$y]," order by `period`,`id` ASC");
   $dbCount=nums("invoice",['year'=>$y]);
 }else{
   // 搜尋該年度當期資料
-  // $sql="select * from `invoice` where `year`='$y' && `period`='$p' order by `period`,`id` ASC";
-  // $sqlCount="select count(*) from `invoice` where `year`='$y' && `period`='$p'";
   $rows=all("invoice",['year'=>$y,"period"=>$p]," order by `period`,`id` ASC");
   $dbCount=nums("invoice",['year'=>$y,"period"=>$p]);
 }
@@ -109,75 +104,79 @@ if(isset($_GET['status'])){
         </div>
 
 
-        <form action="update_invoice.php" method="post">
-          <table>
-            <tr>
-              <td>年份</td>
-              <td>期別</td>
-              <td>獎號</td>
-              <td>花費</td>
-              <td></td>
-            </tr>
-            <?php
-              foreach($rows as $row){
-                
-                if($row['id']==$id && $status=="edit"){
-                  // 編輯
-                  echo "<tr class='item".$row['id']." itemEdit'>";
-                  echo "  <td>";
-                  echo "    <select name='year'>";
-                              for($i=$y1;$i<=$yToday;$i++){
-                                $selected=($y==$i)?'selected':'';
-                                echo "<option value='$i' ".$selected.">".$i."</option>";
-                              }
-                  echo "    </select>";
-                  echo "  </td>";
-                  echo "  <td>";
-                  echo "    <select name='period'>";
-                              for($i=1;$i<=6;$i++){
-                                $selected=($p==$i)?'selected':'';
-                                echo "<option value='$i' ".$selected.">".(2*$i-1)."、".(2*$i)."月</option>";
-                              }
-                  echo "    </select>";
-                  echo "  </td>";
-                  echo "  <td>";
-                  echo "    <div class='divNumber'>";
-                  echo "      <input type='text' name='code' placeholder='英文2碼' maxlength='2' value='".$row['code']."' required>";
-                  echo "      <input type='number' name='number' placeholder='數字8碼' maxlength='8' value='".$row['number']."' required>";
-                  echo "    </div>";
-                  echo "  </td>";
-                  echo "  <td>";
-                  echo "    <input type='number' name='expend' value='".$row['expend']."' required>";
-                  echo "    <input type='hidden' name='id' value='".$row['id']."'>";
-                  echo "    <input type='hidden' name='y' value='$y'>";
-                  echo "    <input type='hidden' name='p' value='$p'>";
-                  echo "  </td>";
-                  echo "  <td>";
-                  echo "    <input class='btn btnSave' type='submit' value='儲存'>";
-                  echo "    <a class='btn btnCancel' href='list.php?y=$y&p=$p'>取消</a>";
-                  echo "  </td>";
-                  echo "</tr>";
+        <table class="listTable">
+          <tr>
+            <td>年份</td>
+            <td>期別</td>
+            <td>獎號</td>
+            <td>花費</td>
+            <td></td>
+          </tr>
+          <?php
+            foreach($rows as $row){
+              
+              if($row['id']==$id && $status=="edit"){
+                // 編輯
+                echo "<tr class='item".$row['id']." itemEdit'>";
+                echo "  <td>";
+                echo "    <select name='year'>";
+                            for($i=$y1;$i<=$yToday;$i++){
+                              $selected=($y==$i)?'selected':'';
+                              echo "<option value='$i' ".$selected.">".$i."</option>";
+                            }
+                echo "    </select>";
+                echo "  </td>";
+                echo "  <td>";
+                echo "    <select name='period'>";
+                            for($i=1;$i<=6;$i++){
+                              $selected=($p==$i)?'selected':'';
+                              echo "<option value='$i' ".$selected.">".(2*$i-1)."、".(2*$i)."月</option>";
+                            }
+                echo "    </select>";
+                echo "  </td>";
+                echo "  <td>";
+                echo "    <div class='divNumber'>";
+                echo "      <input type='text' name='code' placeholder='英文2碼' maxlength='2' value='".$row['code']."' required>";
+                echo "      <input type='number' name='number' placeholder='數字8碼' maxlength='8' value='".$row['number']."' required>";
+                echo "    </div>";
+                echo "  </td>";
+                echo "  <td>";
+                echo "    <input type='number' name='expend' value='".$row['expend']."' required>";
+                echo "    <input type='hidden' name='id' value='".$row['id']."'>";
+                echo "    <input type='hidden' name='y' value='$y'>";
+                echo "    <input type='hidden' name='p' value='$p'>";
+                echo "  </td>";
+                echo "  <td>";
+                echo "    <input class='btn btnSave' type='submit' value='儲存'>";
+                echo "    <a class='btn btnCancel' href='list.php?y=$y&p=$p'>取消</a>";
+                echo "  </td>";
+                echo "</tr>";
 
-                }else{
-                  // 顯示
-                  echo "<tr class='item".$row['id']."'>";
-                  echo "  <td>".$row['year'] ."</td>";
-                  echo "  <td>".($row['period']*2-1).",".($row['period']*2)."月</td>";
-                  echo "  <td>".$row['code'].$row['number']."</td>";
-                  echo "  <td>".$row['expend'] ."</td>";
-                  echo "  <td>";
-                  // echo "    <a class='btn' href='edit_test.php?id=".$row['id']."'>編輯</a>";
-                  echo "    <a class='btn btnEdit' href='list.php?y=$y&p=$p&id=".$row['id']."&status=edit'>編輯</a>";
-                  // echo "    <a class='btn btnDel' href='javascript:void(0);' onclick='dialog_del(".$row['id'].");'>刪除</a>";
-                  echo "    <a class='btn btnDel' href='list.php?y=$y&p=$p&id=".$row['id']."&status=del'>刪除</a>";
-                  echo "  </td>";
-                  echo "</tr>";
-                }
+              }else{
+                // 顯示
+                echo "<tr class='item".$row['id']."'>";
+                echo "  <td>".$row['year'] ."</td>";
+                echo "  <td>".($row['period']*2-1).",".($row['period']*2)."月</td>";
+                echo "  <td>".$row['code'].$row['number']."</td>";
+                echo "  <td>".$row['expend'] ."</td>";
+                echo "  <td>";
+                // echo "    <a class='btn' href='edit_test.php?id=".$row['id']."'>編輯</a>";
+                echo "    <a class='btn btnEdit' href='list.php?y=$y&p=$p&id=".$row['id']."&status=edit'>編輯</a>";
+                // echo "    <a class='btn btnDel' href='javascript:void(0);' onclick='dialog_del(".$row['id'].");'>刪除</a>";
+                echo "    <a class='btn btnDel' href='list.php?y=$y&p=$p&id=".$row['id']."&status=del'>刪除</a>";
+                echo "  </td>";
+                echo "</tr>";
               }
-            ?>
-          </table>
-        </form>
-
+            }
+          ?>
+        </table>
+        
+        <?php
+          if($dbCount==0){
+            echo "<p class='tip'>尚無資料!</p>";
+          }
+        ?>
+        
         <?php
           if($status=="del"){
             echo "<div class='overlay'></div>";
@@ -195,7 +194,7 @@ if(isset($_GET['status'])){
         ?>
 
 
-        <div class="pageNav">
+        <!-- <div class="pageNav">
           <ul>
             <li><a href="#"><</a></li>
             <li><a href="#">1</a></li>
@@ -205,7 +204,7 @@ if(isset($_GET['status'])){
             <li><a href="#">5</a></li>
             <li><a href="#">></a></li>
           </ul>
-        </div>
+        </div> -->
 
       </div>
     </div>
