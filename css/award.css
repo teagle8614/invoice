@@ -62,7 +62,11 @@
   color: red;
   margin-bottom: 10px;
 }
-
+.tip2{
+  color: red;
+  padding: 10px;
+  text-align: center;
+}
 
 /* --- 提示視窗 --- */
 .overlay{

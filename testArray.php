@@ -1,14 +1,17 @@
 <?php
 
 $a[]=[10,20,30];
+echo "a:<br>";
 echo "<pre>"; print_r($a); echo "<pre>";
 echo "<hr>";
 $b=[10,20,30];
+echo "b:<br>";
 echo "<pre>"; print_r($b); echo "<pre>";
 echo "<hr>";
 $c[]=10;
 $c[]=20;
 $c[]=30;
+echo "c:<br>";
 echo "<pre>"; print_r($c); echo "<pre>";
 echo "<hr>";
 $d=[
@@ -20,24 +23,29 @@ $d=[
   "3"=>30,
   "4"=>40
 ];
+echo "d:<br>";
 echo "<pre>"; print_r($d); echo "<pre>";
 echo "<hr>";
 $e=[[20,30],[30,40]];
+echo "e:<br>";
 echo "<pre>"; print_r($e); echo "<pre>";
 echo "<hr>";
 $f[]=[1=>10];
 $f[]=[2=>20];
 $f[]=[3=>30];
+echo "f:<br>";
 echo "<pre>"; print_r($f); echo "<pre>";
 echo "<hr>";
 $g=[3=>30];
 $g=[2=>20];
 $g=[1=>10];
+echo "g:<br>";
 echo "<pre>"; print_r($g); echo "<pre>";
 echo "<hr>";
 $h[]=[1,10];
 $h[]=[2,20];
 $h[]=[3,30];
+echo "h:<br>";
 echo "<pre>"; print_r($h); echo "<pre>";
 echo "<hr>";
 $j[]=[

@@ -19,7 +19,6 @@ if(isset($_GET['status']) || isset($_GET['check'])){
   <title>統一發票管理系統</title>
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/invoice.css">
-
   <style>
     .tipBox{
       display: <?=$tipDisplay;?>;

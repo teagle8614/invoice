@@ -12,31 +12,10 @@ if(isset($_GET['p'])){
   $p=$_GET['p'];
 }
 
-function func_award($num){
-  global $y;
-  global $p;
-  switch($num){
-    case 1:
-      // 特別獎
-      $rows=all('award_number',['period'=>$p,'year'=>$y,'type'=>1]);
-      break;
-    case 2:
-      // 特獎
-      $rows=all('award_number',['period'=>$p,'year'=>$y,'type'=>2]);
-      break;
-    case 3:
-      // 頭獎
-      $rows=all('award_number',['period'=>$p,'year'=>$y,'type'=>3]);
-      break;
-    case 4:
-      // 加開四獎
-      $rows=all('award_number',['period'=>$p,'year'=>$y,'type'=>4]);
-  }
-  return $rows;
-}
+
+$displayCss=dateCompare();
 
 // 兌換時間提示
-$displayCss=dateCompare();
 function dateCompare(){
   global $y;
   $y2=$y+1;
@@ -71,7 +50,7 @@ function dateCompare(){
     return "none";
   }else{
     // 超過時間
-    return "block";
+    return "display";
   }
 
 }
@@ -79,10 +58,10 @@ function dateCompare(){
 
 
 
-// $num1=find('award_number',['period'=>$p,'year'=>$y,'type'=>1]);
-// $num2=find('award_number',['period'=>$p,'year'=>$y,'type'=>2]);
-// $num3=all('award_number',['period'=>$p,'year'=>$y,'type'=>3]);
-// $num4=all('award_number',['period'=>$p,'year'=>$y,'type'=>4]);
+$num1=find('award_number',['period'=>$p,'year'=>$y,'type'=>1]);
+$num2=find('award_number',['period'=>$p,'year'=>$y,'type'=>2]);
+$num3=all('award_number',['period'=>$p,'year'=>$y,'type'=>3]);
+$num4=all('award_number',['period'=>$p,'year'=>$y,'type'=>4]);
 ?>
 
 <!DOCTYPE html>
@@ -201,87 +180,86 @@ function dateCompare(){
           </table>
         </div>
 
-
-        <table class="listTable">
-          <tr>
-            <td>獎項</td>
-            <td>獎號</td>
-            <td>獎金</td>
-          </tr>
-          <?php
-            $count=0;
-            // 獎項清單
-            $awardList=all('award_list');
-
-            for($a=1;$a<=4;$a++){
-              $rows=func_award($a);
-
-              if($a!=3){
-                // 特別獎、特獎、增開六獎
-
-                // 獎項清單索引值
-                if($a!=4){
-                  $alIndex=$a-1;
-                }else{
-                  $alIndex=9-1;
-                }
-
-                echo "<tr class='tr'>";
-                echo "  <td>".$awardList[$alIndex]['award']."</td>";
-                echo "  <td>";
-                foreach($rows as $row){
-                  if(!empty($row['number'])){
-                    echo "<p>".$row['number']."</p>";
-                    $count=$count+1;
+        <form action="" method="post">
+          <table>
+            <tr>
+              <td>獎項</td>
+              <td>獎號</td>
+              <td>獎金</td>
+            </tr>
+            <tr>
+              <td>特別獎</td>
+              <td>
+                <?php
+                  if(!empty($num1['number'])){
+                    echo $num1['number'];
                   }
-                }
-                echo "  </td>";
-                echo "  <td>".$awardList[$alIndex]['bonus']."</td>";
-                echo "</tr>";
-              }else{
-                // 頭獎~六獎
-                for($b=3;$b<=8;$b++){
-                  // $type=[1=>"頭獎",2=>"二獎",3=>"三獎",4=>"四獎",5=>"五獎",6=>"六獎"];
-                  $alIndex=$b-1;
-
-                  echo "<tr class='tr'>";
-                  echo "  <td>".$awardList[$alIndex]['award']."</td>";
-                  if($b==3){
-                    // 跨六欄
-                    echo "  <td rowspan='6'>";
-                    foreach($rows as $row){
-                      if(!empty($row['number'])){
-                        echo "<p>".$row['number']."</p>";
-                        $count=$count+1;
-                      }
+                ?>
+              </td>
+              <td>10000000</td>
+            </tr>
+            <tr>
+              <td>特獎</td>
+              <td>
+                <?php
+                  if(!empty($num2['number'])){
+                    echo $num2['number'];
+                  }
+                ?>
+              </td>
+              <td>2000000</td>
+            </tr>
+            <tr>
+              <td>頭獎</td>
+              <td rowspan="6">
+                <?php
+                  foreach($num3 as $n){
+                    if(!empty($n['number'])){
+                      echo "<p>".$n['number']."</p>";
                     }
-                    echo "  </td>";
                   }
-                  echo "  <td>".$awardList[$alIndex]['bonus']."</td>";
-                  echo "</tr>";
-                }
-              }
-            }
-          ?>
-        </table>
-
-        <?php
-          // 若沒有任何獎號，則不顯示對獎的按鈕
-          if($count>0){
-            echo "<div class='btnBar'>";
-            echo "  <a class='btn2' href='award_number.php?y=$y&p=$p'>全部對獎</a>";
-            echo "</div> ";
-            $trDisplay="table-row";
-          }else{
-            echo "<p class='tip2'>尚無資料!</p>";
-            $trDisplay="none";
-          }
-        ?>
-        <style>
-          .tr{
-            display: <?=$trDisplay;?>;
-          }
-        </style>
+                ?>
+              </td>
+              <td>200000</td>
+            </tr>
+            <tr>
+              <td>二獎</td>
+              <td>40000</td>
+            </tr>
+            <tr>
+              <td>三獎</td>
+              <td>10000</td>
+            </tr>
+            <tr>
+              <td>四獎</td>
+              <td>4000</td>
+            </tr>
+            <tr>
+              <td>五獎</td>
+              <td>1000</td>
+            </tr>
+            <tr>
+              <td>六獎</td>
+              <td>200</td>
+            </tr>
+            <tr>
+              <td>增開六獎</td>
+              <td>
+                <?php
+                  foreach($num4 as $n){
+                    if(!empty($n['number'])){
+                      echo "<p>".$n['number']."</p>";
+                    }
+                  }
+                ?>
+              </td>
+              <td>200</td>
+            </tr>
+          </table>
+          <div class="btnBar">
+            <a class="btn2" href="award_number.php?aw=0&year=<?=$y;?>&period=<?=$p;?>">全部對獎</a>
+          </div> 
+        </form>
 
       </div>
 

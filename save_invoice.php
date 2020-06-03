@@ -27,12 +27,13 @@
   //   echo "新增失敗";
   // }
 
-
+  $year= $_POST['year'];
+  $period= $_POST['period'];
 
   // 改為function寫法
   $data=[
-    'period' => $_POST['period'],
-    'year' => $_POST['year'],
+    'period' => $period,
+    'year' => $year,
     'code' => strtoupper($_POST['code']),
     'number' => $_POST['number'],
     'expend' => $_POST['expend']
@@ -42,10 +43,12 @@
 
   if($res>0){
     echo "新增成功<br>";
-    echo "<a href='index.php'>繼續輸入</a><br>";
-    echo "<a href='list.php'>發票列表</a>";
+    to("index.php?status=true&y=$year&p=$period"); 
+    // echo "<a href='index.php'>繼續輸入</a><br>";
+    // echo "<a href='list.php'>發票列表</a>";
   }else{
-    echo "新增失敗";
+    echo "新增失敗<br>";
+    to("index.php?status=false&y=$year&p=$period"); 
   }
 
 

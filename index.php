@@ -3,6 +3,12 @@
 $y=date("Y");
 // 期別
 $p=ceil(date("n")/2);
+
+if(isset($_GET['status'])){
+  // css
+  $tipDisplay="block";
+  $boxDisplay="none";
+}
 ?>
 <!DOCTYPE html>
 <html lang="zh-TW">
@@ -12,17 +18,45 @@ $p=ceil(date("n")/2);
   <title>統一發票管理系統</title>
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/index.css">
+  <style>
+    .tipBox{
+      display: <?=$tipDisplay;?>;
+    }
+    .invoiceBox{
+      display: <?=$boxDisplay;?>;
+    }
+  </style>
 </head>
 <body>
   
-  
-  <div class="container">
+  <div class="container" x>
 
     <?php 
       $pageheader="統一發票管理系統";
       $navPage="1";
       include "./include/header.php"; 
     ?>
+
+
+    <div div class="tipBox">
+       <?php
+        // 確認是否資料已存在
+        if(isset($_GET['status'])){
+          $y=$_GET['y'];
+          $p=$_GET['p'];
+
+          if($_GET['status']=="true"){
+            echo "<h3 class='tip'>資料新增成功!</h3>";
+            
+          }else{
+            echo "<h3 class='tip'>資料新增失敗!</h3>";
+          }
+          echo "<a class='btn2 btnGO' href='list.php?y=$y&p=$p'>發票列表</a>";
+          echo "<a class='btn2' href='index.php'>繼續輸入</a>";
+        }
+       ?>
+    </div>
+
 
     <div class="invoiceBox">
       <h3>輸入發票資訊</h3>

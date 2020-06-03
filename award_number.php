@@ -3,8 +3,8 @@
   ob_start();
   include "./com/base.php";
   
-  $y=$_GET['year'];
-  $p=$_GET['period'];
+  $y=$_GET['y'];
+  $p=$_GET['p'];
   $award=[]; //存放所有獎號
   $arrayPrev=[]; //前一個獎項的中獎號碼
   $arrayNext=[]; //當前獎項的中獎號碼
@@ -81,7 +81,7 @@
     save($table,$data);
   }
   // 導向中獎頁
-  to("award_list.php");
+  to("award_list.php?y=$y&p=$p");
 
 
 

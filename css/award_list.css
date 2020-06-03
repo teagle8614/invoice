@@ -1,8 +1,11 @@
-.body{
+body{
   position: relative;
+  /* background-color: #000; */
 }
-.invoiceBox{
+.container{
   /* display: flex; */
+  overflow: hidden;
+  background-color: #fff;
 }
 .invoiceBox > div{
   padding: 20px;
@@ -30,6 +33,7 @@
   font-size: 1.25rem;
   font-weight: bold;
 }
+
 
 
 /* --- 表格 --- */
