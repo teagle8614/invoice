@@ -30,90 +30,70 @@
     
     <div class="header">中獎獎號列表</div>
     <div class="invoiceBox">
+    <?php
+      $rows=all("reward_record",""," order by `reward` ASC");
+      if(!empty($rows)){
+        // 有中獎
+    ?>
+        <table class="awardTable">
+          <tr>
+            <td>年份</td>
+            <td>期別</td>
+            <td>獎號</td>
+            <td>花費</td>
+            <td>獎項</td>
+            <td>獎金</td>
+          </tr>
+          <?php
+              // 小計: 獎項、數量、金額
+              $arrayAward=["","","","","","","","","",""]; 
+              $arrayNum=[0,0,0,0,0,0,0,0,0,0];
+              $arrayBouns=[0,0,0,0,0,0,0,0,0,0];
+              // 總數量、總金額
+              $countNum=0;
+              $countBouns=0;
+              foreach($rows as $row){
+                // 獎項列表
+                $list=find("award_list",$row['reward']);
+
+                $p=$row['period'];
+                echo "<tr>";
+                echo "  <td>".$row['year']."</td>";
+                echo "  <td>".(2*$p-1)."、".(2*$p)."月</td>";
+                echo "  <td>".$row['code'].$row['number']."</td>";
+                echo "  <td>".$row['expend']."</td>";
+                echo "  <td>".$list['award']."</td>";
+                echo "  <td>".$list['bonus']."</td>";
+                echo "</tr>";
+                // $countBouns=$countBouns+$list['bonus'];
+
+                $index=$row['reward']-1;
+                $arrayAward[$index]=$list['award'];
+                $arrayNum[$index]=$arrayNum[$index]+1;
+                $arrayBouns[$index]=$arrayBouns[$index]+$list['bonus'];
+              }
+          ?>
+        </table>
+
       <?php
-        $rows=all("reward_record",""," order by `reward` ASC");
-        $countNum=count($rows);
-        $countBouns=0;
-        if(!empty($rows)){
-      ?>
-      <table>
-        <tr>
-          <td>年份</td>
-          <td>期別</td>
-          <td>獎號</td>
-          <td>花費</td>
-          <td>獎項</td>
-          <td>獎金</td>
-        </tr>
-        <?php
-            // $countReward=1;
-            // $countTmp1=0;
-            // $countTmp2=0;
-            // $arrayTest1=[];
-            // $arrayTest2=[];
-
-
-
-            // echo "<pre>"; print_r($rows); echo "<pre>";
-            foreach($rows as $row){
-              // 獎項列表
-              $list=find("award_list",$row['reward']);
-
-              // echo "<pre>"; print_r($list); echo "<pre>";
-              $p=$row['period'];
-              echo "<tr>";
-              echo "  <td>".$row['year']."</td>";
-              echo "  <td>".(2*$p-1)."、".(2*$p)."月</td>";
-              echo "  <td>".$row['code'].$row['number']."</td>";
-              echo "  <td>".$row['expend']."</td>";
-              echo "  <td>".$list['award']."</td>";
-              echo "  <td>".$list['bonus']."</td>";
-              echo "</tr>";
-              $countBouns=$countBouns+$list['bonus'];
-
-
-
-
-              // 改用num()計算?
-
-              // echo "row['reward']:".$row['reward']."<br>";
-
-              // if($row['reward']==$countReward){
-              //   echo "-----------row['reward']:".$row['reward']."<br>";
-              //   echo "-----------countReward:".$countReward."<br>";
-              //   $countTmp1=$countTmp1+1;
-              //   $countTmp2=$countTmp2+$list['bonus'];
-              //   echo "-----------countTmp1:".$countTmp1."<br>";
-              //   echo "-----------countTmp2:".$countTmp2."<br>";
-              // }else{
-              //   echo "===========row['reward']:".$row['reward']."<br>";
-              //   echo "===========countReward:".$countReward."<br>";
-              //   $arrayTest1[]=$countTmp1;
-              //   echo "張數:<br>";
-              //   echo "<pre>"; print_r($arrayTest1); echo "<pre>";
-              //   $arrayTest2[]=$countTmp2;
-              //   echo "小計:<br>";
-              //   echo "<pre>"; print_r($arrayTest2); echo "<pre>";
-
-              //   $countTmp1=0;
-              //   $countTmp2=0;
-              //   $countReward=$countReward+1;
-              //   $countTmp1=$countTmp1+1;
-              //   $countTmp2=$countTmp2+$list['bonus'];
-              // }
-
+          for($z=0;$z<=8;$z++){
+            if($arrayNum[$z]!=0){
+              echo "<p class='subtotal'>".$arrayAward[$z]."，".$arrayNum[$z]."張，小計".$arrayBouns[$z]."元</p>";
+              $countNum=$countNum+$arrayNum[$z];
+              $countBouns=$countBouns+$arrayBouns[$z];
             }
-        ?>
-      </table>
-      <?php
-         echo "<p class='total'>共".$countNum."張，".$countBouns."元</p>";
-         $fireworkDisplay="block";
-         }else{
+          }
+          echo "<p class='total'>合計".$countNum."張，".$countBouns."元</p>";
+          $fireworkDisplay="block";
+
+        }else{
+          // 沒中獎
           echo "<p class='tip'>此期沒有中獎!請再接再厲!</p>";
           $fireworkDisplay="none";
         }
       ?>
       <style>
+        /* 控制煙火顯示與否 */
         .pyro{
           display: <?=$fireworkDisplay;?>;
         }

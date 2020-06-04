@@ -1,0 +1,43 @@
+{/* <input id="input_recipename" class="input_recipename" type="text" onkeyup="words_deal(this);"  */}
+
+function words_deal(item) 
+{ 
+		var item_id = $(item).attr("id");
+
+		// 食譜名稱
+		if(item_id == "input_recipename"){
+				var str = $("#" + item_id).val().substr(0,20); 
+				$("#" + item_id).val(str);
+				// 修正字數會多1之bug
+				var len = $("#" + item_id).val().length;
+				if(len <= 20){
+						$("#txt_count_recipename").html(len + '/20');
+				}
+		}
+		// 食譜簡介
+		else if(item_id == "input_introduction"){
+				var str = $("#" + item_id).val().substr(0,200); 
+				$("#" + item_id).val(str);
+				// 修正字數會多1之bug
+				var len = $("#" + item_id).val().length;
+				if(len <= 200){
+						$("#txt_count_introduction").html(len + '/200');
+				}
+		}
+		// 小撇步
+		else if(item_id == "input_note"){
+				var str = $("#" + item_id).val().substr(0,300); 
+				$("#" + item_id).val(str);
+				// 修正字數會多1之bug
+				var len = $("#" + item_id).val().length;
+				if(len <= 300){
+						$("#txt_count_note").html(len + '/300');
+				}
+		}
+} 
+function strlen(obj, len){
+		if($(obj).val().length > len){
+				var text=$(obj).val().substring(0,len);
+				$(obj).val(text);
+		}
+}

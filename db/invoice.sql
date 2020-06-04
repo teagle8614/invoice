@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2020-05-31 19:25:49
+-- 產生時間： 2020-06-03 19:30:36
 -- 伺服器版本： 10.4.11-MariaDB
 -- PHP 版本： 7.4.3
 
@@ -81,7 +81,10 @@ INSERT INTO `invoice` (`id`, `code`, `number`, `period`, `expend`, `year`) VALUE
 (40, 'SF', '45612210', 3, 892, '2020'),
 (41, 'YY', '22222512', 3, 452, '2020'),
 (42, 'UU', '44444487', 3, 565, '2020'),
-(43, 'JJ', '66666210', 3, 482, '2020');
+(43, 'JJ', '66666210', 3, 482, '2020'),
+(44, 'HH', '15153945', 1, 415, '2020'),
+(45, 'BN', '98453007', 1, 512, '2020'),
+(46, 'JH', '78453508', 6, 482, '2019');
 
 --
 -- 已傾印資料表的索引
@@ -101,7 +104,7 @@ ALTER TABLE `invoice`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `invoice`
 --
 ALTER TABLE `invoice`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '流水號', AUTO_INCREMENT=44;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '流水號', AUTO_INCREMENT=47;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

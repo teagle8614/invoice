@@ -35,42 +35,41 @@ body{
 }
 
 
-
 /* --- 表格 --- */
-table{
+.awardTable{
   width: 100%;
 }
-table tr:nth-child(odd){
+.awardTable tr:nth-child(odd){
   background-color: #eee;
 }
-table tr:first-child{
+.awardTable tr:first-child{
   color: #fff;
   background-color: #b47dda;
 }
-table td{
+.awardTable td{
   border-bottom: 1px solid #ddd;
 }
-table tr:first-child td{
+.awardTable tr:first-child td{
   border: 1px solid #b47dda;
 }
-table td p{
+.awardTable td p{
   margin-bottom: 10px;
 }
-table td p:last-child{
+.awardTable td p:last-child{
   margin-bottom: 0;
 }
-.btnAward{
-  color: #fff;
-  background-color: orange;
-  border: 1px solid orange;
-}
-.btnAward:hover{
-  color: orange;
-  background-color: #fff;
-}
 
+
+.subtotal{
+  width: 40%;
+  margin-right: 0;
+  margin-left: auto;
+  padding: 10px;
+  text-align: right;
+}
 .total{
-  padding: 15px 15px 0 0;
+  color: orange;
+  padding: 10px 15px 0 0;
   text-align: right;
   font-size: 1.25rem;
   font-weight: bold;
