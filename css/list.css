@@ -111,12 +111,12 @@ select,input{
   background-color: #fff;
 } 
 .btnSave{
-  background-color: orange;
-  border: 1px solid orange;
+  background-color: #3dcff1;
+  border: 1px solid #3dcff1;
   margin-bottom: 5px;
 } 
 .btnSave:hover{
-  color: orange;
+  color: #3dcff1;
   background-color: #fff;
 } 
 .btnCancel{
@@ -131,47 +131,4 @@ select,input{
   color: red;
   padding: 10px;
   text-align: center;
-}
-
-
-.overlay{
-  /* display: none; */
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: #333333dd;
-}
-.checkBox{
-  /* display: none; */
-  position: absolute;
-  width: 300px;
-  top: 50%;
-  left: 50%;
-  text-align: center;
-  transform: translate(-50%,-50%);
-  background-color: #fff;
-  padding: 30px;
-  font-size: 1.15rem;  
-  letter-spacing: 1.2px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  z-index: 10;
-}
-.checkBox .btn2{
-  width: 50px;
-  font-size: 1.25rem;
-}
-.checkBox .btnClose{
-  background-color: #ccc;
-  border: 1px solid #ccc;
-}
-.checkBox .btnClose:hover{
-  color: #ccc;
-  background-color: #fff;
-}
-.checkBox p{
-  font-size: 1.25rem;
-  margin-bottom: 15px;
 }

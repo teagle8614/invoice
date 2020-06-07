@@ -46,6 +46,7 @@ function func_award($num){
 // 編輯狀態
 $id="";
 $cssDisplay="inline-block";
+$cssScroll="auto";
 if(isset($_GET['id'])){
   $id=$_GET['id'];
   $cssDisplay="none";
@@ -54,6 +55,9 @@ if(isset($_GET['id'])){
 $status="";
 if(isset($_GET['status'])){
   $status=$_GET['status'];
+  if($status=="del"){
+    $cssScroll="hidden";
+  }
 }
 ?>
 <!DOCTYPE html>
@@ -65,8 +69,13 @@ if(isset($_GET['status'])){
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/query.css">
   <style>
+    /* 刪除視窗出現時則不可滾動 */
+    body{
+      overflow-y: <?=$cssScroll;?>;
+    }
     /* 當有項目在編輯時，將其他編輯按鈕隱藏 */
-    a.btnEdit{
+    a.btnEdit,
+    a.btnDelAll{
       display: <?=$cssDisplay;?>;
     }
   </style>
@@ -113,8 +122,6 @@ if(isset($_GET['status'])){
           ?>
         </div>
 
-
-
         <table class="listTable">
           <tr>
             <td>年份</td>
@@ -126,9 +133,6 @@ if(isset($_GET['status'])){
           <?php
             for($x=1;$x<=4;$x++){
               $rows=func_award($x);
-              // echo "<pre>"; print_r($rows); echo "</pre>";
-              // echo "----------<br>";
-              
 
               foreach($rows as $row){
                 if($row['id']==$id){
@@ -152,7 +156,7 @@ if(isset($_GET['status'])){
                   echo "  </td>";
                   echo "  <td>".$type[$x]."</td>";
                   echo "  <td>";
-                  echo "    <input type='number' name='number' placeholder='數字8碼' maxlength='8' value='".$row['number']."' required>";
+                  echo "    <input type='number' name='number' placeholder='數字8碼' maxlength='8' value='".$row['number']."' onkeyup='strlen(this,8);' required>";
                   echo "    <input type='hidden' name='id' value='".$row['id']."'>";
                   echo "    <input type='hidden' name='y' value='$y'>";
                   echo "    <input type='hidden' name='p' value='$p'>";
@@ -214,10 +218,12 @@ if(isset($_GET['status'])){
             echo "</div>";
           }
         ?>
-
       </div>
-
     </div>
   </div>
+
+
+  <script src="plugins/jquery-3.5.1.min.js"></script>
+  <script src="js/js.js"></script>
 </body>
 </html>

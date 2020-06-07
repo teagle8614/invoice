@@ -44,6 +44,7 @@ if(isset($_GET['status']) || isset($_GET['check'])){
 
           echo "<h3 class='tip'>該期獎號已存在！</h3>";
           echo "<p class='tip'>請善用修改或是刪除的功能</p>";
+          echo "<p class='tip'>若輸入的個數有誤，請全部刪除後再重新輸入</p>";
           echo "<a class='btn2 btnGO' href='query.php?y=$y&p=$p'>前往查詢獎號頁</a>";
           echo "<a class='btn2' href='invoice.php'>重新輸入</a>";
         }
@@ -97,30 +98,30 @@ if(isset($_GET['status']) || isset($_GET['check'])){
           <tr>
             <td>特別獎</td>
             <td>
-              <input type="number" name="num1" maxlength="8" required>
+              <input type="number" name="num1" placeholder="數字8碼" onkeyup="strlen(this,8);" required>
             </td>
           </tr>
           <tr>
             <td>特獎</td>
             <td>
-              <input type="number" name="num2" maxlength="8" required>
+              <input type="number" name="num2" placeholder="數字8碼" onkeyup="strlen(this,8);" required>
             </td>
           </tr>
           <tr>
             <td>頭獎</td>
             <td>
-              <input type="number" name="num3[]" maxlength="8" required>
-              <input type="number" name="num3[]" maxlength="8">
-              <input type="number" name="num3[]" maxlength="8">
-              <input type="number" name="num3[]" maxlength="8">
+              <input type="number" name="num3[]" placeholder="數字8碼" onkeyup="strlen(this,8);" required>
+              <input type="number" name="num3[]" placeholder="數字8碼" onkeyup="strlen(this,8);">
+              <input type="number" name="num3[]" placeholder="數字8碼" onkeyup="strlen(this,8);">
+              <input type="number" name="num3[]" placeholder="數字8碼" onkeyup="strlen(this,8);">
             </td>
           </tr>
           <tr>
             <td>增開六獎</td>
             <td>
-              <input type="number" name="num4[]" maxlength="3" required>
-              <input type="number" name="num4[]" maxlength="3">
-              <input type="number" name="num4[]" maxlength="3">
+              <input type="number" name="num4[]" placeholder="數字3碼" onkeyup="strlen(this,3);" required>
+              <input type="number" name="num4[]" placeholder="數字3碼" onkeyup="strlen(this,3);">
+              <input type="number" name="num4[]" placeholder="數字3碼" onkeyup="strlen(this,3);">
             </td>
           </tr>
         </table>
@@ -131,5 +132,8 @@ if(isset($_GET['status']) || isset($_GET['check'])){
       </form>
     </div>
   </div>
+
+  <script src="plugins/jquery-3.5.1.min.js"></script>
+  <script src="js/js.js"></script>
 </body>
 </html>

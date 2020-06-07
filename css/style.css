@@ -58,6 +58,7 @@ input[type=submit],
 input[type=reset]{
   height: auto;
   cursor: pointer;
+  transition-duration: 0.5s;
 }
 table{
   width: 100%;
@@ -71,9 +72,9 @@ table tr td{
 
 .container{
   width: 1000px;
-  margin: 0 auto;
+  margin: 10px auto;
   border-radius: 10px;
-  /* overflow: hidden; */
+  overflow: hidden;
   border: 1px solid #ddd;
 }
 
@@ -125,6 +126,133 @@ table tr td{
   color: orange;
   background-color: #fff;
 }
+
+
+/* --- 重置視窗 --- */
+.resetBox{
+  position: absolute;
+  width: 300px;
+  top: 30%;
+  left: -300px;
+  text-align: center;
+  transform: translateY(-50%);
+  color: #fff;
+  background-color: #74c288;
+  padding: 30px;
+  font-size: 1.15rem;  
+  letter-spacing: 1.2px;
+  border-radius:  0 15px 15px 0;
+  z-index: 100;
+  transition-duration: 1.5s;
+}
+.resetBox:hover{
+  left: -10px;
+}
+.resetBox:hover .boxBtn{
+  transform: rotate(-180deg);
+}
+.resetBox h3{
+  margin-bottom: 10px;
+}
+.resetBox p{
+  text-align-last: left;
+  margin-bottom: 15px;
+}
+.resetBox .boxBtnDiv{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 52%;
+  right: -50px;
+  transform: translateY(-50%);
+  display: inline-block;
+  width: 0;
+  height: 0;
+  padding: 30px 25px;
+  animation: ani_controlBtn 2s linear 0s infinite;
+}
+.resetBox .boxBtn{
+  position: relative;
+  display: inline-block;
+  top: -30px;
+  border-style: solid;
+  border-width: 30px 0 30px 30px;
+  border-color: transparent transparent transparent #74c288aa;
+  cursor: pointer;
+}
+.resetBox .boxBtn::before{
+  position: absolute;
+  right: 20px;
+  top: -30px;
+  content: '';
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 30px 0 30px 10px;
+  border-color: transparent transparent transparent #fff;
+}
+.resetBox .btn2{
+  background-color: #74c288;
+  border: 1px solid #fff;
+}
+.resetBox .btn2:hover{
+  color: #74c288;
+  background-color: #fff;
+}
+@keyframes ani_controlBtn{
+  50%{
+    right: -40px;
+  }
+  100%{
+    right: -50px;
+  }
+}
+
+
+/* --- 確認視窗 --- */
+.overlay{
+  /* display: none; */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #333333dd;
+}
+.checkBox{
+  /* display: none; */
+  position: absolute;
+  width: 300px;
+  top: 50%;
+  left: 50%;
+  text-align: center;
+  transform: translate(-50%,-50%);
+  background-color: #fff;
+  padding: 30px;
+  font-size: 1.15rem;  
+  letter-spacing: 1.2px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  z-index: 10;
+}
+.checkBox .btn2{
+  width: 50px;
+  font-size: 1.25rem;
+}
+.checkBox .btnClose{
+  background-color: #ccc;
+  border: 1px solid #ccc;
+}
+.checkBox .btnClose:hover{
+  color: #ccc;
+  background-color: #fff;
+}
+.checkBox p{
+  font-size: 1.25rem;
+  margin-bottom: 15px;
+}
+
 
 /* --- pageNav --- */
 .pageNav{

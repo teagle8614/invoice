@@ -4,10 +4,23 @@ $y=date("Y");
 // 期別
 $p=ceil(date("n")/2);
 
+
+$cssScroll="auto";
 if(isset($_GET['status'])){
   // css
   $tipDisplay="block";
   $boxDisplay="none";
+}
+if(isset($_GET['reset'])){
+  // css
+  if($_GET['reset']=="true"){
+    $tipDisplay="block";
+    $boxDisplay="none";
+  }
+  if($_GET['reset']=="ask"){
+    $cssScroll="hidden";
+  }
+
 }
 ?>
 <!DOCTYPE html>
@@ -19,6 +32,11 @@ if(isset($_GET['status'])){
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/index.css">
   <style>
+    /* 重置視窗出現時則不可滾動 */
+    body{
+      overflow-y: <?=$cssScroll;?>;
+    }
+
     .tipBox{
       display: <?=$tipDisplay;?>;
     }
@@ -29,14 +47,12 @@ if(isset($_GET['status'])){
 </head>
 <body>
   
-  <div class="container" x>
-
+  <div class="container">
     <?php 
       $pageheader="統一發票管理系統";
       $navPage="1";
       include "./include/header.php"; 
     ?>
-
 
     <div div class="tipBox">
        <?php
@@ -54,6 +70,13 @@ if(isset($_GET['status'])){
           echo "<a class='btn2 btnGO' href='list.php?y=$y&p=$p'>發票列表</a>";
           echo "<a class='btn2' href='index.php'>繼續輸入</a>";
         }
+
+        if(isset($_GET['reset']) && $_GET['reset']=="true"){
+          echo "<h3 class='tip'>資料已重置完畢!</h3>";
+          echo "<a class='btn2' href='index.php'>確定</a>";
+        }
+
+
        ?>
     </div>
 
@@ -95,7 +118,7 @@ if(isset($_GET['status'])){
             <td>
               <div class="divNumber">
                 <input type="text" name="code" placeholder="英文2碼" maxlength="2" required>
-                <input type="number" name="number" placeholder="數字8碼" maxlength="8" required>
+                <input type="number" name="number" placeholder="數字8碼" onkeyup="strlen(this,8);" required>
               </div>
             </td>
           </tr>
@@ -108,8 +131,36 @@ if(isset($_GET['status'])){
           <input class="btn2" type="submit" value="儲存">
         </div>
       </form>
-    </div>
 
+      <?php
+          // 重置資料
+          if(isset($_GET['reset']) && $_GET['reset']=="ask"){
+            echo "<div class='overlay'></div>";
+            echo "<div class='checkBox'>";
+            echo "  <form action='del_query.php' method='post'>";
+            echo "    <p>是否確定要重置?</p>";
+            echo "    <p>重置後所有資料都會恢復成開發完成時的狀態</p>";
+            echo "    <a class='btn2 btnOK' href='reset_db.php'>是</a>";
+            echo "    <a class='btn2 btnClose' href='index.php'>否</a>";
+            echo "  </form>";
+            echo "</div>";
+          }
+        ?>
+    </div>
   </div>
+
+
+
+  <div class="resetBox">
+    <div class="boxBtnDiv">
+      <div class="boxBtn"></div>
+    </div>
+    <p>資料都被弄亂了嗎?</p>
+    <p>點擊按鈕，就可以施展魔法將所有資料都重置為開發完成時的狀態唷ヽ(✿ﾟ▽ﾟ)ノ</p>
+    <a href="index.php?reset=ask" class="btn2">施展魔法</a>
+  </div>
+
+  <script src="plugins/jquery-3.5.1.min.js"></script>
+  <script src="js/js.js"></script>
 </body>
 </html>

@@ -47,21 +47,8 @@
 .divNumber input[type=number]{
   width: 72%;
 }
-/* .btnBar{
-  margin-top: 20px;
-  text-align: center;
-} */
 
-/* input[type=submit]{
-  width: 150px;
-  color: #fff;
-  background-color: orange;
-  padding: 5px 20px;
-  border: 0px solid #000;
-  border-radius: 5px;
+
+.checkBox{
+  width: 500px;
 }
-input[type=submit]:hover{
-  color: orange;
-  background-color: #fff;
-  border: 1px solid orange;
-} */

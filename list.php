@@ -32,6 +32,7 @@ if($p==0){
 $id="";
 $status="";
 $cssDisplay="inline-block";
+$cssScroll="auto";
 if(isset($_GET['id'])){
   $id=$_GET['id'];
 }
@@ -39,6 +40,9 @@ if(isset($_GET['status'])){
   $status=$_GET['status'];
   if($status=="edit"){
     $cssDisplay="none";
+  }
+  if($status=="del"){
+    $cssScroll="hidden";
   }
 }
 ?>
@@ -52,6 +56,10 @@ if(isset($_GET['status'])){
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/list.css">
   <style>
+    /* 刪除視窗出現時則不可滾動 */
+    body{
+      overflow-y: <?=$cssScroll;?>;
+    }
     /* 當有項目在編輯時，將其他編輯與刪除按鈕隱藏 */
     a.btnEdit,
     a.btnDel{
@@ -137,7 +145,7 @@ if(isset($_GET['status'])){
                 echo "  <td>";
                 echo "    <div class='divNumber'>";
                 echo "      <input type='text' name='code' placeholder='英文2碼' maxlength='2' value='".$row['code']."' required>";
-                echo "      <input type='number' name='number' placeholder='數字8碼' maxlength='8' value='".$row['number']."' required>";
+                echo "      <input type='number' name='number' placeholder='數字8碼' value='".$row['number']."' onkeyup='strlen(this,8);' required>";
                 echo "    </div>";
                 echo "  </td>";
                 echo "  <td>";
@@ -211,21 +219,6 @@ if(isset($_GET['status'])){
   </div>
 
   <script src="plugins/jquery-3.5.1.min.js"></script>
-  <script>
-
-
-    // $(".btnDel").click(function(){
-    //   $(".listBox .overlay").fadeTo(500, 1);
-    //   $(".listBox .checkBox").fadeTo(500, 1);
-    // });
-    $(".checkBox .btnClose").click(function(){
-      $(".listBox .overlay").fadeOut(100);
-      $(".listBox .checkBox").fadeOut(100);
-    });
-    // $(".overlay").click(function(){
-    //   $(".listBox .overlay").fadeOut(100);
-    //   $(".listBox .checkBox").fadeOut(100);
-    // });
-  </script>
+  <script src="js/js.js"></script>
 </body>
 </html>
