@@ -33,7 +33,7 @@ if(isset($_GET['status']) || isset($_GET['check'])){
     <?php 
       $pageheader="新增獎號";
       $navPage="4";
-      include "./include/header.php"; 
+      include "include/header.php"; 
     ?>
 
     <div class="tipBox">
@@ -45,7 +45,7 @@ if(isset($_GET['status']) || isset($_GET['check'])){
           echo "<h3 class='tip'>該期獎號已存在！</h3>";
           echo "<p class='tip'>請善用修改或是刪除的功能</p>";
           echo "<p class='tip'>若輸入的個數有誤，請全部刪除後再重新輸入</p>";
-          echo "<a class='btn2 btnGO' href='query.php?y=$y&p=$p'>前往查詢獎號頁</a>";
+          echo "<a class='btn2 btnGO' href='query.php?y=$y&p=$p'>前往獎號列表</a>";
           echo "<a class='btn2' href='invoice.php'>重新輸入</a>";
         }
 
@@ -56,6 +56,7 @@ if(isset($_GET['status']) || isset($_GET['check'])){
           }else{
             echo "<h3 class='tip'>資料部分有誤!</h3>";
           }
+          echo "<a class='btn2 btnGO' href='query.php?y=$y&p=$p'>前往獎號列表</a>";
           echo "<a class='btn2' href='invoice.php'>繼續輸入</a>";
         }
        ?>
@@ -65,7 +66,7 @@ if(isset($_GET['status']) || isset($_GET['check'])){
 
     <div class="invoiceBox"> 
       <h3>輸入中獎號碼資訊</h3>
-      <form action="save_number.php" method="post">
+      <form action="api/save_number.php" method="post">
         <table>
           <tr>
             <td>年份</td>

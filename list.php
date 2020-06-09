@@ -1,6 +1,5 @@
 <?php
-include "./com/base.php";
-
+include "com/base.php";
 
 // 年份、期別搜尋
 $y=date("Y");
@@ -23,10 +22,7 @@ if($p==0){
   $rows=all("invoice",['year'=>$y,"period"=>$p]," order by `period`,`id` ASC");
   $dbCount=nums("invoice",['year'=>$y,"period"=>$p]);
 }
-// echo $sql;
-// $rows=$pdo->query($sql)->fetchAll();
-// $dbCount=$pdo->query($sqlCount)->fetch();
-// echo $dbCount[0];
+
 
 // 編輯狀態
 $id="";
@@ -45,6 +41,20 @@ if(isset($_GET['status'])){
     $cssScroll="hidden";
   }
 }
+
+// 提示訊息
+$edit="";
+$del="";
+if(isset($_GET['edit'])){
+  $edit=$_GET['edit'];
+  $tipDisplay="block";
+  $boxDisplay="none";
+}
+if(isset($_GET['del'])){
+  $del=$_GET['del'];
+  $tipDisplay="block";
+  $boxDisplay="none";
+}
 ?>
 
 <!DOCTYPE html>
@@ -56,14 +66,21 @@ if(isset($_GET['status'])){
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/list.css">
   <style>
-    /* 刪除視窗出現時則不可滾動 */
-    body{
-      overflow-y: <?=$cssScroll;?>;
-    }
     /* 當有項目在編輯時，將其他編輯與刪除按鈕隱藏 */
     a.btnEdit,
     a.btnDel{
       display: <?=$cssDisplay;?>;
+    }
+    /* 編輯與刪除的提示訊息 */
+    .tipBox{
+      display: <?=$tipDisplay;?>;
+    }
+    .invoiceBox{
+      display: <?=$boxDisplay;?>;
+    }
+    /* 刪除視窗出現時則不可滾動 */
+    body{
+      overflow-y: <?=$cssScroll;?>;
     }
   </style>
 </head>
@@ -72,8 +89,34 @@ if(isset($_GET['status'])){
     <?php 
       $pageheader="發票列表";
       $navPage="2";
-      include "./include/header.php"; 
+      include "include/header.php"; 
     ?>
+
+    <div div class="tipBox">
+      <?php
+        // 資料編輯
+        if(isset($_GET['edit'])){
+          if($edit=="true"){
+            echo "<h3>資料編輯成功!</h3>";
+          }else{
+            echo "<h3>資料編輯失敗!</h3>";
+          }
+          echo "<a class='btn2' href='list.php?y=$y&p=$p'>回到列表</a>";
+        }
+
+        // 資料刪除
+        if(isset($_GET['del'])){
+          if($del=="true"){
+            echo "<h3>資料刪除成功!</h3>";
+          }else{
+            echo "<h3>資料刪除失敗!</h3>";
+          }
+          echo "<a class='btn2' href='list.php?y=$y&p=$p'>回到列表</a>";
+        }
+
+      ?>
+    </div>
+
 
     <div class="invoiceBox">
 
@@ -98,7 +141,7 @@ if(isset($_GET['status'])){
           <li><a class="<?=($p==6)?'active':'';?>" href="list.php?y=<?=$y;?>&p=6">11,12月</a></li>
         </ul>
       </div>
-
+      
       <div class="listBox">
         <div class="topBar">
           <?php
@@ -111,85 +154,86 @@ if(isset($_GET['status'])){
           <p>共有<?php echo $dbCount;?>筆</p>
         </div>
 
+        <form action="api/update_invoice.php" method="post">
+          <table class="listTable">
+            <tr>
+              <td>年份</td>
+              <td>期別</td>
+              <td>獎號</td>
+              <td>花費</td>
+              <td></td>
+            </tr>
+            <?php
+              foreach($rows as $row){
+                
+                if($row['id']==$id && $status=="edit"){
+                  // 編輯
+                  echo "<tr class='item".$row['id']." itemEdit'>";
+                  echo "  <td>";
+                  echo "    <select name='year'>";
+                              for($i=$y1;$i<=$yToday;$i++){
+                                $selected=($y==$i)?'selected':'';
+                                echo "<option value='$i' ".$selected.">".$i."</option>";
+                              }
+                  echo "    </select>";
+                  echo "  </td>";
+                  echo "  <td>";
+                  echo "    <select name='period'>";
+                              for($i=1;$i<=6;$i++){
+                                $selected=($p==$i)?'selected':'';
+                                echo "<option value='$i' ".$selected.">".(2*$i-1)."、".(2*$i)."月</option>";
+                              }
+                  echo "    </select>";
+                  echo "  </td>";
+                  echo "  <td>";
+                  echo "    <div class='divNumber'>";
+                  echo "      <input type='text' name='code' placeholder='英文2碼' maxlength='2' value='".$row['code']."' required>";
+                  echo "      <input type='number' name='number' placeholder='數字8碼' value='".$row['number']."' onkeyup='strlen(this,8);' required>";
+                  echo "    </div>";
+                  echo "  </td>";
+                  echo "  <td>";
+                  echo "    <input type='number' name='expend' value='".$row['expend']."' required>";
+                  echo "    <input type='hidden' name='id' value='".$row['id']."'>";
+                  echo "    <input type='hidden' name='y' value='$y'>";
+                  echo "    <input type='hidden' name='p' value='$p'>";
+                  echo "  </td>";
+                  echo "  <td>";
+                  echo "    <input class='btn btnSave' type='submit' value='儲存'>";
+                  echo "    <a class='btn btnCancel' href='list.php?y=$y&p=$p'>取消</a>";
+                  echo "  </td>";
+                  echo "</tr>";
 
-        <table class="listTable">
-          <tr>
-            <td>年份</td>
-            <td>期別</td>
-            <td>獎號</td>
-            <td>花費</td>
-            <td></td>
-          </tr>
-          <?php
-            foreach($rows as $row){
-              
-              if($row['id']==$id && $status=="edit"){
-                // 編輯
-                echo "<tr class='item".$row['id']." itemEdit'>";
-                echo "  <td>";
-                echo "    <select name='year'>";
-                            for($i=$y1;$i<=$yToday;$i++){
-                              $selected=($y==$i)?'selected':'';
-                              echo "<option value='$i' ".$selected.">".$i."</option>";
-                            }
-                echo "    </select>";
-                echo "  </td>";
-                echo "  <td>";
-                echo "    <select name='period'>";
-                            for($i=1;$i<=6;$i++){
-                              $selected=($p==$i)?'selected':'';
-                              echo "<option value='$i' ".$selected.">".(2*$i-1)."、".(2*$i)."月</option>";
-                            }
-                echo "    </select>";
-                echo "  </td>";
-                echo "  <td>";
-                echo "    <div class='divNumber'>";
-                echo "      <input type='text' name='code' placeholder='英文2碼' maxlength='2' value='".$row['code']."' required>";
-                echo "      <input type='number' name='number' placeholder='數字8碼' value='".$row['number']."' onkeyup='strlen(this,8);' required>";
-                echo "    </div>";
-                echo "  </td>";
-                echo "  <td>";
-                echo "    <input type='number' name='expend' value='".$row['expend']."' required>";
-                echo "    <input type='hidden' name='id' value='".$row['id']."'>";
-                echo "    <input type='hidden' name='y' value='$y'>";
-                echo "    <input type='hidden' name='p' value='$p'>";
-                echo "  </td>";
-                echo "  <td>";
-                echo "    <input class='btn btnSave' type='submit' value='儲存'>";
-                echo "    <a class='btn btnCancel' href='list.php?y=$y&p=$p'>取消</a>";
-                echo "  </td>";
-                echo "</tr>";
-
-              }else{
-                // 顯示
-                echo "<tr class='item".$row['id']."'>";
-                echo "  <td>".$row['year'] ."</td>";
-                echo "  <td>".($row['period']*2-1).",".($row['period']*2)."月</td>";
-                echo "  <td>".$row['code'].$row['number']."</td>";
-                echo "  <td>".$row['expend'] ."</td>";
-                echo "  <td>";
-                // echo "    <a class='btn' href='edit_test.php?id=".$row['id']."'>編輯</a>";
-                echo "    <a class='btn btnEdit' href='list.php?y=$y&p=$p&id=".$row['id']."&status=edit'>編輯</a>";
-                // echo "    <a class='btn btnDel' href='javascript:void(0);' onclick='dialog_del(".$row['id'].");'>刪除</a>";
-                echo "    <a class='btn btnDel' href='list.php?y=$y&p=$p&id=".$row['id']."&status=del'>刪除</a>";
-                echo "  </td>";
-                echo "</tr>";
+                }else{
+                  // 顯示
+                  echo "<tr class='item".$row['id']."'>";
+                  echo "  <td>".$row['year'] ."</td>";
+                  echo "  <td>".($row['period']*2-1).",".($row['period']*2)."月</td>";
+                  echo "  <td>".$row['code'].$row['number']."</td>";
+                  echo "  <td>".$row['expend'] ."</td>";
+                  echo "  <td>";
+                  // echo "    <a class='btn' href='edit_test.php?id=".$row['id']."'>編輯</a>";
+                  echo "    <a class='btn btnEdit' href='list.php?y=$y&p=$p&id=".$row['id']."&status=edit'>編輯</a>";
+                  // echo "    <a class='btn btnDel' href='javascript:void(0);' onclick='dialog_del(".$row['id'].");'>刪除</a>";
+                  echo "    <a class='btn btnDel' href='list.php?y=$y&p=$p&id=".$row['id']."&status=del'>刪除</a>";
+                  echo "  </td>";
+                  echo "</tr>";
+                }
               }
+            ?>
+          </table>
+        
+          <?php
+            if($dbCount==0){
+              echo "<p class='tip'>尚無資料!</p>";
             }
           ?>
-        </table>
-        
-        <?php
-          if($dbCount==0){
-            echo "<p class='tip'>尚無資料!</p>";
-          }
-        ?>
-        
+        </form>
+
         <?php
           if($status=="del"){
             echo "<div class='overlay'></div>";
             echo "<div class='checkBox'>";
-            echo "  <form action='del_invoice.php' method='post'>";
+            echo "  <form action='api/del_invoice.php' method='post'>";
             echo "    <p>確認刪除該筆資料?</p>";
             echo "    <input type='hidden' name='id' value='$id'>";
             echo "    <input type='hidden' name='y' value='$y'>";
@@ -200,7 +244,7 @@ if(isset($_GET['status'])){
             echo "</div>";
           }
         ?>
-
+        
 
         <!-- <div class="pageNav">
           <ul>

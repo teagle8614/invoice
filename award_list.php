@@ -1,5 +1,5 @@
 <?php
-  include "./com/base.php";
+  include "com/base.php";
 
   $y=$_GET['y'];
   $p=$_GET['p'];

@@ -1,5 +1,5 @@
 <?php
-  include "./com/base.php";
+  include "../com/base.php";
 
   // 盡量將$_POST[' ']的值抓出來，判定是否符合資料庫的規範，在存入資料庫內
   // htmlspecialchars(): 可以將符號、特殊字元轉為其他格式
@@ -43,12 +43,12 @@
 
   if($res>0){
     echo "新增成功<br>";
-    to("index.php?status=true&y=$year&p=$period"); 
+    to("../index.php?status=true&y=$year&p=$period"); 
     // echo "<a href='index.php'>繼續輸入</a><br>";
     // echo "<a href='list.php'>發票列表</a>";
   }else{
     echo "新增失敗<br>";
-    to("index.php?status=false&y=$year&p=$period"); 
+    to("../index.php?status=false&y=$year&p=$period"); 
   }
 
 

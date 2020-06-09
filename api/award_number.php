@@ -1,7 +1,7 @@
 <!-- 對獎頁 -->
 <?php
   ob_start();
-  include "./com/base.php";
+  include "../com/base.php";
   
   $y=$_GET['y'];
   $p=$_GET['p'];
@@ -81,7 +81,7 @@
     save($table,$data);
   }
   // 導向中獎頁
-  to("award_list.php?y=$y&p=$p");
+  to("../award_list.php?y=$y&p=$p");
 
 
 

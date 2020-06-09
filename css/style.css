@@ -72,7 +72,7 @@ table tr td{
 
 .container{
   width: 1000px;
-  margin: 10px auto;
+  margin: 20px auto;
   border-radius: 10px;
   overflow: hidden;
   border: 1px solid #ddd;
@@ -127,6 +127,27 @@ table tr td{
   background-color: #fff;
 }
 
+
+/* --- 提示訊息 --- */
+.tipBox{
+  padding: 30px 0;
+  text-align: center;
+  display: none;
+}
+.tipBox h3,
+.tipBox p{
+  color: #000;
+  margin-bottom: 15px;
+}
+.tipBox .btnGO{
+  background-color: yellowgreen;
+  border: 1px solid yellowgreen;
+  margin-right: 10px;
+}
+.tipBox .btnGO:hover{
+  color: yellowgreen;
+  background-color: #fff;
+}
 
 /* --- 重置視窗 --- */
 .resetBox{
@@ -210,7 +231,7 @@ table tr td{
 }
 
 
-/* --- 確認視窗 --- */
+/* --- 彈跳視窗 --- */
 .overlay{
   /* display: none; */
   position: absolute;

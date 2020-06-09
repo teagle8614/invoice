@@ -51,11 +51,11 @@ if(isset($_GET['reset'])){
     <?php 
       $pageheader="統一發票管理系統";
       $navPage="1";
-      include "./include/header.php"; 
+      include "include/header.php"; 
     ?>
 
     <div div class="tipBox">
-       <?php
+      <?php
         // 確認是否資料已存在
         if(isset($_GET['status'])){
           $y=$_GET['y'];
@@ -77,13 +77,13 @@ if(isset($_GET['reset'])){
         }
 
 
-       ?>
+      ?>
     </div>
 
 
     <div class="invoiceBox">
       <h3>輸入發票資訊</h3>
-      <form action="save_invoice.php" method="post">
+      <form action="api/save_invoice.php" method="post">
         <table>
           <tr>
             <td>年份</td>
@@ -137,12 +137,10 @@ if(isset($_GET['reset'])){
           if(isset($_GET['reset']) && $_GET['reset']=="ask"){
             echo "<div class='overlay'></div>";
             echo "<div class='checkBox'>";
-            echo "  <form action='del_query.php' method='post'>";
-            echo "    <p>是否確定要重置?</p>";
-            echo "    <p>重置後所有資料都會恢復成開發完成時的狀態</p>";
-            echo "    <a class='btn2 btnOK' href='reset_db.php'>是</a>";
-            echo "    <a class='btn2 btnClose' href='index.php'>否</a>";
-            echo "  </form>";
+            echo "  <p>是否確定要重置?</p>";
+            echo "  <p>重置後所有資料都會恢復成開發完成時的狀態</p>";
+            echo "  <a class='btn2 btnOK' href='api/reset_db.php'>是</a>";
+            echo "  <a class='btn2 btnClose' href='index.php'>否</a>";
             echo "</div>";
           }
         ?>

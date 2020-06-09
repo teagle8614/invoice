@@ -1,5 +1,5 @@
 <?php
-include "./com/base.php";
+include "com/base.php";
 
 // 年份、期別搜尋
 $y=date("Y");
@@ -106,7 +106,7 @@ function dateCompare(){
     <?php 
       $pageheader="對獎";
       $navPage="3";
-      include "./include/header.php"; 
+      include "include/header.php"; 
     ?>
 
 
@@ -269,7 +269,7 @@ function dateCompare(){
           // 若沒有任何獎號，則不顯示對獎的按鈕
           if($count>0){
             echo "<div class='btnBar'>";
-            echo "  <a class='btn2' href='award_number.php?y=$y&p=$p'>全部對獎</a>";
+            echo "  <a class='btn2' href='api/award_number.php?y=$y&p=$p'>全部對獎</a>";
             echo "</div> ";
             $trDisplay="table-row";
           }else{

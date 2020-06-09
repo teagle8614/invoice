@@ -1,6 +1,6 @@
 <!-- 存入獎號 -->
 <?php
-  include "./com/base.php";
+  include "../com/base.php";
   // echo "<pre>"; print_r($_POST); echo "</pre>";
   /**
    * 年份     -> year
@@ -25,7 +25,7 @@
   if($count>0){
     // 已有資料
     echo "已有資料";
-    to("invoice.php?check=true&y=$year&p=$period"); 
+    to("../invoice.php?check=true&y=$year&p=$period"); 
   }else{
     // 尚未有資料
     echo "尚未有資料";
@@ -83,9 +83,9 @@
 
     // 導回對獎頁
     if($res1>0 && $res2>0 && $res3>0 && $res4>0){
-      to("invoice.php?status=true"); 
+      to("../invoice.php?status=true"); 
     }else{
-      to("invoice.php?status=false"); 
+      to("../invoice.php?status=false"); 
     }
   }
   
