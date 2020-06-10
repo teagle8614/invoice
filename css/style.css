@@ -233,7 +233,6 @@ table tr td{
 
 /* --- 彈跳視窗 --- */
 .overlay{
-  /* display: none; */
   position: absolute;
   top: 0;
   left: 0;
@@ -242,7 +241,6 @@ table tr td{
   background-color: #333333dd;
 }
 .checkBox{
-  /* display: none; */
   position: absolute;
   width: 300px;
   top: 50%;
@@ -287,7 +285,6 @@ table tr td{
 .pageNav ul li a{
   color: #333;
   padding: 5px 10px;
-  /* border: 1px solid #ddd; */
 }
 .pageNav ul li a:hover{
   color: orange;

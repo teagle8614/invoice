@@ -31,7 +31,6 @@ input{
 
 input[type=submit]{
   width: 150px;
-  
 }
 input[type=submit]:hover{
   color: orange;
@@ -47,5 +46,4 @@ input[type=reset]{
 input[type=reset]:hover{
   color: #eee;
   background-color: #333;
-  
 }

@@ -8,10 +8,6 @@
   $y=$_POST['y'];
   $p=$_POST['p'];
 
-  // echo "period=".$period."<br>";
-  // echo "year=".$year."<br>";
-  // echo "number=".$number."<br>";
-
 
   $table="award_number";
   $data=[
@@ -23,18 +19,11 @@
   $res=save($table,$data);
 
 
-
-  // $sql="update `invoice` set `period`='".$_POST['period']."', `year`='".$_POST['year']."', `code`='".strtoupper($_POST['code'])."', `number`='".$_POST['number']."', `expend`='".$_POST['expend']."' where `id`='".$_POST['id']."'";
-  // $res=$pdo->exec($sql);
-
-  // $id
-  // $rows=find($table,$id);
-
   if($res>0){
-    // echo "修改成功";
+    // 修改成功
     to("../query.php?edit=true&y=$y&p=$p");
   }else{
-    // echo "修改失敗";
+    // 修改失敗
     to("../query.php?edit=false&y=$y&p=$p");
   }
 

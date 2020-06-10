@@ -13,10 +13,10 @@
   $res=del($table,$data);
 
   if($res>0){
-    // echo "刪除成功";
+    // 刪除成功
     to("../query.php?del=true&y=$y&p=$p");
   }else{
-    // echo "刪除失敗";
+    // 刪除失敗
     to("../query.php?del=false&y=$y&p=$p");
   }
 ?>

@@ -1,80 +1,78 @@
 <?php
-include "com/base.php";
+  include "com/base.php";
 
-// 年份、期別搜尋
-$y=date("Y");
-if(isset($_GET['y'])){
-  $y=$_GET['y'];
-}
-// 月份/2 為期數
-$p=ceil(date("n")/2);
-if(isset($_GET['p'])){
-  $p=$_GET['p'];
-}
-
-$type=[
-  1 => "特別獎",
-  2 => "特獎",
-  3 => "頭獎",
-  4 => "加開四獎"
-];
-
-function func_award($num){
-  global $y;
-  global $p;
-  switch($num){
-    case 1:
-      // 特別獎
-      $rows=all('award_number',['period'=>$p,'year'=>$y,'type'=>1]);
-      break;
-    case 2:
-      // 特獎
-      $rows=all('award_number',['period'=>$p,'year'=>$y,'type'=>2]);
-      break;
-    case 3:
-      // 頭獎
-      $rows=all('award_number',['period'=>$p,'year'=>$y,'type'=>3]);
-      break;
-    case 4:
-      // 加開四獎
-      $rows=all('award_number',['period'=>$p,'year'=>$y,'type'=>4]);
+  // 年份、期別搜尋
+  $y=date("Y");
+  if(isset($_GET['y'])){
+    $y=$_GET['y'];
   }
-  return $rows;
-}
-
-
-// 編輯狀態
-$id="";
-$cssDisplay="inline-block";
-$cssScroll="auto";
-if(isset($_GET['id'])){
-  $id=$_GET['id'];
-  $cssDisplay="none";
-}
-
-// 提示訊息
-$edit="";
-$del="";
-if(isset($_GET['edit'])){
-  $edit=$_GET['edit'];
-  $tipDisplay="block";
-  $boxDisplay="none";
-}
-if(isset($_GET['del'])){
-  $del=$_GET['del'];
-  $tipDisplay="block";
-  $boxDisplay="none";
-}
-
-// 顯示全部刪除提示視窗
-$status="";
-if(isset($_GET['status'])){
-  $status=$_GET['status'];
-  if($status=="del"){
-    $cssScroll="hidden";
+  // 月份/2 為期數
+  $p=ceil(date("n")/2);
+  if(isset($_GET['p'])){
+    $p=$_GET['p'];
   }
-}
 
+  $type=[
+    1 => "特別獎",
+    2 => "特獎",
+    3 => "頭獎",
+    4 => "加開四獎"
+  ];
+
+  function func_award($num){
+    global $y;
+    global $p;
+    switch($num){
+      case 1:
+        // 特別獎
+        $rows=all('award_number',['period'=>$p,'year'=>$y,'type'=>1]);
+        break;
+      case 2:
+        // 特獎
+        $rows=all('award_number',['period'=>$p,'year'=>$y,'type'=>2]);
+        break;
+      case 3:
+        // 頭獎
+        $rows=all('award_number',['period'=>$p,'year'=>$y,'type'=>3]);
+        break;
+      case 4:
+        // 加開四獎
+        $rows=all('award_number',['period'=>$p,'year'=>$y,'type'=>4]);
+    }
+    return $rows;
+  }
+
+  // 編輯狀態
+  $id="";
+  $cssDisplay="inline-block";
+  $cssScroll="auto";
+  if(isset($_GET['id'])){
+    $id=$_GET['id'];
+    $cssDisplay="none";
+  }
+
+  // 提示訊息
+  $edit="";
+  $del="";
+  if(isset($_GET['edit'])){
+    $edit=$_GET['edit'];
+    $tipDisplay="block";
+    $boxDisplay="none";
+  }
+  if(isset($_GET['del'])){
+    $del=$_GET['del'];
+    $tipDisplay="block";
+    $boxDisplay="none";
+  }
+
+  // 顯示全部刪除提示視窗
+  $status="";
+  if(isset($_GET['status'])){
+    $status=$_GET['status'];
+    if($status=="del"){
+      $cssScroll="hidden";
+    }
+  }
 ?>
 <!DOCTYPE html>
 <html lang="zh-TW">
@@ -85,7 +83,6 @@ if(isset($_GET['status'])){
   <link rel="stylesheet" href="./css/style.css">
   <link rel="stylesheet" href="./css/query.css">
   <style>
-    
     /* 當有項目在編輯時，將其他編輯按鈕隱藏 */
     a.btnEdit,
     a.btnDelAll{
@@ -280,7 +277,6 @@ if(isset($_GET['status'])){
       </div>
     </div>
   </div>
-
 
   <script src="plugins/jquery-3.5.1.min.js"></script>
   <script src="js/js.js"></script>

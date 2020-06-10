@@ -1,4 +1,4 @@
-<!-- 存入獎號 -->
+<!-- 新增獎號 -->
 <?php
   include "../com/base.php";
   // echo "<pre>"; print_r($_POST); echo "</pre>";
@@ -11,7 +11,6 @@
    * 增開六獎 -> num4 可能多筆，且只有三碼
    */
 
-  
   $table="award_number";
   $year=$_POST['year'];
   $period=$_POST['period'];
@@ -24,11 +23,9 @@
   $count=nums($table,$data);
   if($count>0){
     // 已有資料
-    echo "已有資料";
     to("../invoice.php?check=true&y=$year&p=$period"); 
   }else{
     // 尚未有資料
-    echo "尚未有資料";
  
 
     // 儲存特別獎
@@ -83,8 +80,10 @@
 
     // 導回對獎頁
     if($res1>0 && $res2>0 && $res3>0 && $res4>0){
+      // 新增成功
       to("../invoice.php?status=true"); 
     }else{
+      // 新增失敗
       to("../invoice.php?status=false"); 
     }
   }

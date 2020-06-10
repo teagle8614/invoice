@@ -1,60 +1,59 @@
 <?php
-include "com/base.php";
+  include "com/base.php";
 
-// 年份、期別搜尋
-$y=date("Y");
-if(isset($_GET['y'])){
-  $y=$_GET['y'];
-}
-// 月份/2 為期數
-$p=ceil(date("n")/2);
-if(isset($_GET['p'])){
-  $p=$_GET['p'];
-}
-
-// 讀取表格資料
-if($p==0){
-  // 搜尋該年度全部資料
-  $rows=all("invoice",['year'=>$y]," order by `period`,`id` ASC");
-  $dbCount=nums("invoice",['year'=>$y]);
-}else{
-  // 搜尋該年度當期資料
-  $rows=all("invoice",['year'=>$y,"period"=>$p]," order by `period`,`id` ASC");
-  $dbCount=nums("invoice",['year'=>$y,"period"=>$p]);
-}
-
-
-// 編輯狀態
-$id="";
-$status="";
-$cssDisplay="inline-block";
-$cssScroll="auto";
-if(isset($_GET['id'])){
-  $id=$_GET['id'];
-}
-if(isset($_GET['status'])){
-  $status=$_GET['status'];
-  if($status=="edit"){
-    $cssDisplay="none";
+  // 年份、期別搜尋
+  $y=date("Y");
+  if(isset($_GET['y'])){
+    $y=$_GET['y'];
   }
-  if($status=="del"){
-    $cssScroll="hidden";
+  // 月份/2 為期數
+  $p=ceil(date("n")/2);
+  if(isset($_GET['p'])){
+    $p=$_GET['p'];
   }
-}
 
-// 提示訊息
-$edit="";
-$del="";
-if(isset($_GET['edit'])){
-  $edit=$_GET['edit'];
-  $tipDisplay="block";
-  $boxDisplay="none";
-}
-if(isset($_GET['del'])){
-  $del=$_GET['del'];
-  $tipDisplay="block";
-  $boxDisplay="none";
-}
+  // 讀取表格資料
+  if($p==0){
+    // 搜尋該年度全部資料
+    $rows=all("invoice",['year'=>$y]," order by `period`,`id` ASC");
+    $dbCount=nums("invoice",['year'=>$y]);
+  }else{
+    // 搜尋該年度當期資料
+    $rows=all("invoice",['year'=>$y,"period"=>$p]," order by `period`,`id` ASC");
+    $dbCount=nums("invoice",['year'=>$y,"period"=>$p]);
+  }
+
+  // 編輯狀態
+  $id="";
+  $status="";
+  $cssDisplay="inline-block";
+  $cssScroll="auto";
+  if(isset($_GET['id'])){
+    $id=$_GET['id'];
+  }
+  if(isset($_GET['status'])){
+    $status=$_GET['status'];
+    if($status=="edit"){
+      $cssDisplay="none";
+    }
+    if($status=="del"){
+      $cssScroll="hidden";
+    }
+  }
+
+  // 提示訊息
+  $edit="";
+  $del="";
+  if(isset($_GET['edit'])){
+    $edit=$_GET['edit'];
+    $tipDisplay="block";
+    $boxDisplay="none";
+  }
+  if(isset($_GET['del'])){
+    $del=$_GET['del'];
+    $tipDisplay="block";
+    $boxDisplay="none";
+  }
 ?>
 
 <!DOCTYPE html>
@@ -103,7 +102,6 @@ if(isset($_GET['del'])){
           }
           echo "<a class='btn2' href='list.php?y=$y&p=$p'>回到列表</a>";
         }
-
         // 資料刪除
         if(isset($_GET['del'])){
           if($del=="true"){
@@ -113,7 +111,6 @@ if(isset($_GET['del'])){
           }
           echo "<a class='btn2' href='list.php?y=$y&p=$p'>回到列表</a>";
         }
-
       ?>
     </div>
 
@@ -202,7 +199,6 @@ if(isset($_GET['del'])){
                   echo "    <a class='btn btnCancel' href='list.php?y=$y&p=$p'>取消</a>";
                   echo "  </td>";
                   echo "</tr>";
-
                 }else{
                   // 顯示
                   echo "<tr class='item".$row['id']."'>";
@@ -211,9 +207,7 @@ if(isset($_GET['del'])){
                   echo "  <td>".$row['code'].$row['number']."</td>";
                   echo "  <td>".$row['expend'] ."</td>";
                   echo "  <td>";
-                  // echo "    <a class='btn' href='edit_test.php?id=".$row['id']."'>編輯</a>";
                   echo "    <a class='btn btnEdit' href='list.php?y=$y&p=$p&id=".$row['id']."&status=edit'>編輯</a>";
-                  // echo "    <a class='btn btnDel' href='javascript:void(0);' onclick='dialog_del(".$row['id'].");'>刪除</a>";
                   echo "    <a class='btn btnDel' href='list.php?y=$y&p=$p&id=".$row['id']."&status=del'>刪除</a>";
                   echo "  </td>";
                   echo "</tr>";
@@ -244,7 +238,6 @@ if(isset($_GET['del'])){
             echo "</div>";
           }
         ?>
-        
 
         <!-- <div class="pageNav">
           <ul>
@@ -257,7 +250,6 @@ if(isset($_GET['del'])){
             <li><a href="#">></a></li>
           </ul>
         </div> -->
-
       </div>
     </div>
   </div>

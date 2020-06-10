@@ -1,15 +1,14 @@
 <?php
-// 年份
-$y=date("Y");
-// 期別
-$p=ceil(date("n")/2);
+  // 年份
+  $y=date("Y");
+  // 期別
+  $p=ceil(date("n")/2);
 
-if(isset($_GET['status']) || isset($_GET['check'])){
-  // css
-  $tipDisplay="block";
-  $boxDisplay="none";
-}
-
+  if(isset($_GET['status']) || isset($_GET['check'])){
+    // css
+    $tipDisplay="block";
+    $boxDisplay="none";
+  }
 ?>
 <!DOCTYPE html>
 <html lang="zh-TW">
@@ -41,7 +40,6 @@ if(isset($_GET['status']) || isset($_GET['check'])){
         if(isset($_GET['check']) && $_GET['check']=="true"){
           $y=$_GET['y'];
           $p=$_GET['p'];
-
           echo "<h3 class='tip'>該期獎號已存在！</h3>";
           echo "<p class='tip'>請善用修改或是刪除的功能</p>";
           echo "<p class='tip'>若輸入的個數有誤，請全部刪除後再重新輸入</p>";
@@ -60,9 +58,7 @@ if(isset($_GET['status']) || isset($_GET['check'])){
           echo "<a class='btn2' href='invoice.php'>繼續輸入</a>";
         }
        ?>
-      
     </div>
-
 
     <div class="invoiceBox"> 
       <h3>輸入中獎號碼資訊</h3>

@@ -1,27 +1,27 @@
 <?php
-// 年份
-$y=date("Y");
-// 期別
-$p=ceil(date("n")/2);
+  // 年份
+  $y=date("Y");
+  // 期別
+  $p=ceil(date("n")/2);
 
 
-$cssScroll="auto";
-if(isset($_GET['status'])){
-  // css
-  $tipDisplay="block";
-  $boxDisplay="none";
-}
-if(isset($_GET['reset'])){
-  // css
-  if($_GET['reset']=="true"){
+  $cssScroll="auto";
+  if(isset($_GET['status'])){
+    // css
     $tipDisplay="block";
     $boxDisplay="none";
   }
-  if($_GET['reset']=="ask"){
-    $cssScroll="hidden";
-  }
+  if(isset($_GET['reset'])){
+    // css
+    if($_GET['reset']=="true"){
+      $tipDisplay="block";
+      $boxDisplay="none";
+    }
+    if($_GET['reset']=="ask"){
+      $cssScroll="hidden";
+    }
 
-}
+  }
 ?>
 <!DOCTYPE html>
 <html lang="zh-TW">
@@ -75,8 +75,6 @@ if(isset($_GET['reset'])){
           echo "<h3 class='tip'>資料已重置完畢!</h3>";
           echo "<a class='btn2' href='index.php'>確定</a>";
         }
-
-
       ?>
     </div>
 
@@ -146,7 +144,6 @@ if(isset($_GET['reset'])){
         ?>
     </div>
   </div>
-
 
 
   <div class="resetBox">

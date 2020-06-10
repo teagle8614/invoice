@@ -1,9 +1,7 @@
 body{
   position: relative;
-  /* background-color: #000; */
 }
 .container{
-  /* display: flex; */
   overflow: hidden;
   background-color: #fff;
 }

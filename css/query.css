@@ -45,7 +45,6 @@ body{
 
 .listBox{
   width: 100%;
-  /* margin: 0 auto; */
 }
 .topBar{
   display: flex;
@@ -64,12 +63,6 @@ body{
 .listTable tr:first-child{
   color: #fff;
   background-color: #b47dda;
-}
-.listTable tr:first-child td{
-  /* border: 1px solid #b47dda; */
-}
-.listTable td{
-  /* border: 1px solid #ddd; */
 }
 .listTable td:first-child{
   width: 120px;

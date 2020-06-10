@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2020-05-24 19:19:53
+-- 產生時間： 2020-06-09 18:21:29
 -- 伺服器版本： 10.4.11-MariaDB
 -- PHP 版本： 7.4.3
 
@@ -77,7 +77,13 @@ INSERT INTO `award_number_bak` (`id`, `year`, `period`, `number`, `type`) VALUES
 (34, 2019, 4, '47464012', 3),
 (35, 2019, 4, '62781818', 3),
 (36, 2019, 4, '928', 4),
-(37, 2019, 4, '899', 4);
+(37, 2019, 4, '899', 4),
+(38, 2020, 2, '91911374', 1),
+(39, 2020, 2, '08501338', 2),
+(40, 2020, 2, '57161318', 3),
+(41, 2020, 2, '23570653', 3),
+(42, 2020, 2, '47332279', 3),
+(43, 2020, 2, '519', 4);
 
 --
 -- 已傾印資料表的索引
@@ -97,7 +103,7 @@ ALTER TABLE `award_number_bak`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `award_number_bak`
 --
 ALTER TABLE `award_number_bak`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '流水號', AUTO_INCREMENT=38;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '流水號', AUTO_INCREMENT=44;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

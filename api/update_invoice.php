@@ -10,12 +10,7 @@
   $y=$_POST['y'];
   $p=$_POST['p'];
 
-  // echo "period=".$period."<br>";
-  // echo "year=".$year."<br>";
-  // echo "code=".$code."<br>";
-  // echo "number=".$number."<br>";
-  // echo "expend=".$expend."<br>";
-  
+
   $table="invoice";
   $data=[
     "id" => $id,
@@ -27,17 +22,12 @@
   ];
   $res=save($table,$data);
 
-  
-
-
-  // $sql="update `invoice` set `period`='".$_POST['period']."', `year`='".$_POST['year']."', `code`='".strtoupper($_POST['code'])."', `number`='".$_POST['number']."', `expend`='".$_POST['expend']."' where `id`='".$_POST['id']."'";
-  // $res=$pdo->exec($sql);
 
   if($res>0){
-    // echo "修改成功";
+    // 修改成功
     to("../list.php?edit=true&y=$y&p=$p");
   }else{
-    // echo "修改失敗";
+    // 修改失敗
     to("../list.php?edit=false&y=$y&p=$p");
   }
 

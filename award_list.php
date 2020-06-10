@@ -65,7 +65,6 @@
                 echo "  <td>".$list['award']."</td>";
                 echo "  <td>".$list['bonus']."</td>";
                 echo "</tr>";
-                // $countBouns=$countBouns+$list['bonus'];
 
                 $index=$row['reward']-1;
                 $arrayAward[$index]=$list['award'];

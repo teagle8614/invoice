@@ -1,88 +1,76 @@
 <?php
-include "com/base.php";
+  include "com/base.php";
 
-// 年份、期別搜尋
-$y=date("Y");
-if(isset($_GET['y'])){
-  $y=$_GET['y'];
-}
-// 月份/2 為期數
-$p=ceil(date("n")/2);
-if(isset($_GET['p'])){
-  $p=$_GET['p'];
-}
-
-function func_award($num){
-  global $y;
-  global $p;
-  switch($num){
-    case 1:
-      // 特別獎
-      $rows=all('award_number',['period'=>$p,'year'=>$y,'type'=>1]);
-      break;
-    case 2:
-      // 特獎
-      $rows=all('award_number',['period'=>$p,'year'=>$y,'type'=>2]);
-      break;
-    case 3:
-      // 頭獎
-      $rows=all('award_number',['period'=>$p,'year'=>$y,'type'=>3]);
-      break;
-    case 4:
-      // 加開四獎
-      $rows=all('award_number',['period'=>$p,'year'=>$y,'type'=>4]);
+  // 年份、期別搜尋
+  $y=date("Y");
+  if(isset($_GET['y'])){
+    $y=$_GET['y'];
   }
-  return $rows;
-}
-
-// 兌換時間提示
-$displayCss=dateCompare();
-function dateCompare(){
-  global $y;
-  $y2=$y+1;
-  global $p;
-  switch($p){
-    case 1:
-      $deadline=strtotime(date("$y-7-5"));
-      break;
-    case 2:
-      $deadline=strtotime(date("$y-9-5"));
-      break;
-    case 3:
-      $deadline=strtotime(date("$y-11-5"));
-      break;
-    case 4:
-      $deadline=strtotime(date("$y2-1-5"));
-      break;
-    case 5:
-      $deadline=strtotime(date("$y2-3-5"));
-      break;
-    case 6:
-      $deadline=strtotime(date("$y2-5-5"));
-      break;
-  }
-  // echo (2*$p-1)."、".(2*$p)."月<br>";
-  // echo "deadline:".$deadline."<br>";
-
-  $today=strtotime(date("Y-m-d"));
-  // echo "today:".$today."<br>";
-  if($today<$deadline){
-    // 未超過時間
-    return "none";
-  }else{
-    // 超過時間
-    return "block";
+  // 月份/2 為期數
+  $p=ceil(date("n")/2);
+  if(isset($_GET['p'])){
+    $p=$_GET['p'];
   }
 
-}
+  function func_award($num){
+    global $y;
+    global $p;
+    switch($num){
+      case 1:
+        // 特別獎
+        $rows=all('award_number',['period'=>$p,'year'=>$y,'type'=>1]);
+        break;
+      case 2:
+        // 特獎
+        $rows=all('award_number',['period'=>$p,'year'=>$y,'type'=>2]);
+        break;
+      case 3:
+        // 頭獎
+        $rows=all('award_number',['period'=>$p,'year'=>$y,'type'=>3]);
+        break;
+      case 4:
+        // 加開四獎
+        $rows=all('award_number',['period'=>$p,'year'=>$y,'type'=>4]);
+    }
+    return $rows;
+  }
 
+  // 兌換時間提示
+  $displayCss=dateCompare();
+  function dateCompare(){
+    global $y;
+    $y2=$y+1;
+    global $p;
+    switch($p){
+      case 1:
+        $deadline=strtotime(date("$y-7-5"));
+        break;
+      case 2:
+        $deadline=strtotime(date("$y-9-5"));
+        break;
+      case 3:
+        $deadline=strtotime(date("$y-11-5"));
+        break;
+      case 4:
+        $deadline=strtotime(date("$y2-1-5"));
+        break;
+      case 5:
+        $deadline=strtotime(date("$y2-3-5"));
+        break;
+      case 6:
+        $deadline=strtotime(date("$y2-5-5"));
+        break;
+    }
 
-
-
-// $num1=find('award_number',['period'=>$p,'year'=>$y,'type'=>1]);
-// $num2=find('award_number',['period'=>$p,'year'=>$y,'type'=>2]);
-// $num3=all('award_number',['period'=>$p,'year'=>$y,'type'=>3]);
-// $num4=all('award_number',['period'=>$p,'year'=>$y,'type'=>4]);
+    $today=strtotime(date("Y-m-d"));
+    if($today<$deadline){
+      // 未超過時間
+      return "none";
+    }else{
+      // 超過時間
+      return "block";
+    }
+  }
 ?>
 
 <!DOCTYPE html>
@@ -218,7 +206,6 @@ function dateCompare(){
 
               if($a!=3){
                 // 特別獎、特獎、增開六獎
-
                 // 獎項清單索引值
                 if($a!=4){
                   $alIndex=$a-1;
@@ -241,7 +228,6 @@ function dateCompare(){
               }else{
                 // 頭獎~六獎
                 for($b=3;$b<=8;$b++){
-                  // $type=[1=>"頭獎",2=>"二獎",3=>"三獎",4=>"四獎",5=>"五獎",6=>"六獎"];
                   $alIndex=$b-1;
 
                   echo "<tr class='tr'>";

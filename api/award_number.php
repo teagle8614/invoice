@@ -1,4 +1,4 @@
-<!-- 對獎頁 -->
+<!-- 對獎 -->
 <?php
   ob_start();
   include "../com/base.php";
@@ -36,14 +36,6 @@
       ];
     }
   }
-
-  // echo "<br>----------------------------------------------<br>";
-  // echo "award<br>";
-  // echo "<pre>"; print_r($award); echo "<pre>";
-  // echo "<br>----------------------------------------------<br>";  
-  // $serialized_array = serialize($award);
-  // to("award_list.php?y=".$y."&p=".$p."&list=$serialized_array");
-
 
   // 資料存進去前先清空資料表
   $table="reward_record";
@@ -87,6 +79,8 @@
 
 
   
+
+
   // 對獎
   function func_award($aw){
     global $y;
@@ -133,7 +127,6 @@
       "type"=>$award_type[$aw][1],
     ]);
     echo "獎號數量：".$award_nums;
-    echo "<br>-------------------------------<br>";
     
 
     echo "<h5>對獎獎號</h5>";
@@ -173,7 +166,6 @@
 
     // 比對兩個陣列的資料
     foreach($invoices as $ins){
-
       foreach($t_num as $tn){
 
         // 從後面算取幾位數
@@ -183,13 +175,10 @@
         // 針對"增開六獎"特別處理substr的開始位置
         if($aw!=3){
           $target_num=mb_substr($tn,$start,$len);
-          // echo "target=".$target_num.",tn=".$tn.",start=".$start.",len=".$len."<br>";
         }
         else{
           $target_num=$tn;
         }
-
-
 
         if(mb_substr($ins['number'],$start,$len) == $target_num){
           echo "<span style='color: red;font-size:20px;'>".$ins['number']."中獎了</span><br>";
@@ -203,8 +192,6 @@
               "number" => $ins['number']
             ];
           }
-        }else{
-          // echo $target_num.",".$ins['number']."沒中獎<br>";
         }
       }
     }
@@ -213,7 +200,6 @@
     if($aw>=4){
       // 將兩個陣列做比對，$temp會為arrayPrev裡多的元素，也就等同於前一次的獎別
       $temp=array_diff($arrayPrev,$arrayNext);
-
 
       // 將$temp的元素存入$array中，並將獎別一同存入
       foreach($temp as $t){
@@ -236,16 +222,6 @@
       }
     }
 
-
-    echo "award<br>";
-    echo "<pre>"; print_r($award); echo "<pre>";
-    echo "arrayPrev<br>";
-    echo "<pre>"; print_r($arrayPrev); echo "<pre>";
-    echo "arrayNext<br>";
-    echo "<pre>"; print_r($arrayNext); echo "<pre>";
-    echo "arrayAward<br>";
-    echo "<pre>"; print_r($arrayAward); echo "<pre>";
-    echo "<br>======================================<br>";
   }
   ob_end_flush();
 ?>
