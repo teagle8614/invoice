@@ -5,38 +5,7 @@
   padding: 20px;
 }
 
-.sideNav{
-  width: 150px;
-  min-width: 150px;
-  border-right: 1px solid #ddd;
-}
-.sideNav select{
-  font-size: 1.15rem;
-  margin-bottom: 20px;
-}
-.sideNav ul li{
-  margin-bottom: 10px;
-  text-align: center;
-  letter-spacing: 2px;
-}
-.sideNav ul li:last-child{
-  margin-bottom: 0;
-}
-.sideNav ul li a{
-  color: #fff;
-  background-color: orange;
-  border: 1px solid orange;
-  padding: 15px 0;
-}
-.sideNav ul li a.active{
-  background-color: #ee7f3f;
-  border: 1px solid #ee7f3f;
-  pointer-events: none;
-}
-.sideNav ul li a:hover{
-  color: orange;
-  background-color: #fff;
-}
+
 
 
 .listBox{

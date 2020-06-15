@@ -49,6 +49,8 @@
 
         // 確認是否資料已存在
         if(isset($_GET['status'])){
+          $y=$_GET['y'];
+          $p=$_GET['p'];
           if($_GET['status']=="true"){
             echo "<h3 class='tip'>資料新增成功!</h3>";
           }else{

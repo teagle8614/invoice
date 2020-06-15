@@ -81,7 +81,7 @@
     // 導回對獎頁
     if($res1>0 && $res2>0 && $res3>0 && $res4>0){
       // 新增成功
-      to("../invoice.php?status=true"); 
+      to("../invoice.php?status=true&y=$year&p=$period"); 
     }else{
       // 新增失敗
       to("../invoice.php?status=false"); 

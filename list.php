@@ -15,13 +15,43 @@
   // 讀取表格資料
   if($p==0){
     // 搜尋該年度全部資料
-    $rows=all("invoice",['year'=>$y]," order by `period`,`id` ASC");
+    // $rows=all("invoice",['year'=>$y]," order by `period`,`id` ASC");
+
+
+    // 分頁
+    // 總筆數
     $dbCount=nums("invoice",['year'=>$y]);
+    // 一頁幾筆
+    $page_num=10;
+    // 頁數(無條件進位)
+    $pages=ceil($dbCount/$page_num);
+    // 現在的頁數
+    $page_now=(!empty($_GET['page']))?$_GET['page']:1;
+    // 從第幾筆開始
+    $page_start=($page_now-1)*$page_num;
+    $rows=all("invoice",['year'=>$y],"  order by `period`,`id` ASC limit $page_start,$page_num");
+
+
   }else{
     // 搜尋該年度當期資料
-    $rows=all("invoice",['year'=>$y,"period"=>$p]," order by `period`,`id` ASC");
+    // $rows=all("invoice",['year'=>$y,"period"=>$p]," order by `period`,`id` ASC");
+
+
+    // 分頁
+    // 總筆數
     $dbCount=nums("invoice",['year'=>$y,"period"=>$p]);
+    // 一頁幾筆
+    $page_num=10;
+    // 頁數(無條件進位)
+    $pages=ceil($dbCount/$page_num);
+    // 現在的頁數
+    $page_now=(!empty($_GET['page']))?$_GET['page']:1;
+    // 從第幾筆開始
+    $page_start=($page_now-1)*$page_num;
+    $rows=all("invoice",['year'=>$y,"period"=>$p],"  order by `period`,`id` ASC limit $page_start,$page_num");
   }
+
+
 
   // 編輯狀態
   $id="";
@@ -239,17 +269,44 @@
           }
         ?>
 
-        <!-- <div class="pageNav">
+        
+        <!-- 分頁 -->
+        <div class="pageNav">
           <ul>
-            <li><a href="#"><</a></li>
-            <li><a href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a class="active" href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">></a></li>
+            <?php
+              if($page_now>1){
+
+                if($p==0){
+                  // 整年度搜尋
+                  echo "<li><a href='?y=$y&p=0&page=".($page_now-1)."'><</a></li>";
+                }else{
+                  // 搜尋單一期別
+                  echo "<li><a href='?y=$y&p=$p&page=".($page_now-1)."'><</a></li>"; 
+                }
+              }
+
+
+              for($i=1;$i<=$pages;$i++){
+                $active=($i==$page_now)?"class='active'":"";
+                if($p==0){
+                  echo "<li><a $active href='?y=$y&p=0&page=$i'>$i</a></li>";
+                }else{
+                  echo "<li><a $active href='?y=$y&p=$p&page=$i'>$i</a></li>";
+                }
+              }
+
+              if($page_now<$pages){  
+                if($p==0){
+                  // 整年度搜尋
+                  echo "<li><a href='?y=$y&p=0&page=".($page_now+1)."'>></a></li>";
+                }else{
+                  // 搜尋單一期別
+                  echo "<li><a href='?y=$y&p=$p&page=".($page_now+1)."'>></a></li>";
+                }
+              }  
+            ?>
           </ul>
-        </div> -->
+        </div>
       </div>
     </div>
   </div>
